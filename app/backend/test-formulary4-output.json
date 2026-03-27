@@ -1,0 +1,46 @@
+[
+  {
+    "name": "CASE 1: STEMI + Active Bleeding (Conflict Escalation)",
+    "diagnosis": "STEMI",
+    "severity": "Critical",
+    "escalation": "URGENT SPECIALIST INTERVENTION REQUIRED",
+    "treatments": [],
+    "medicationAlerts": [],
+    "contraindicationsTriggered": [
+      "Standard therapy withheld: Aspirin due to CRITICAL PROTOCOL CONFLICT (Active Bleed + Anticoagulant Indication)",
+      "Standard therapy withheld: Clopidogrel due to CRITICAL PROTOCOL CONFLICT (Active Bleed + Anticoagulant Indication)",
+      "Standard therapy withheld: Heparin due to CRITICAL PROTOCOL CONFLICT (Active Bleed + Anticoagulant Indication)"
+    ]
+  },
+  {
+    "name": "CASE 2: Sepsis + Shock + Multiple Interactions",
+    "diagnosis": "Sepsis / Septic Shock",
+    "severity": "Critical",
+    "escalation": "ICU LEVEL CARE REQUIRED",
+    "treatments": [
+      {
+        "drug": "Noradrenaline",
+        "dose": "Titrate MAP >65",
+        "route": "IV",
+        "reason": "Vasopressor support initially",
+        "priority": 1
+      },
+      {
+        "drug": "IV Fluids (NS/RL)",
+        "dose": "2100 ml",
+        "route": "IV",
+        "reason": "Fluid resuscitation (SSC Guideline)",
+        "priority": 2
+      },
+      {
+        "drug": "Piperacillin-Tazobactam",
+        "dose": "4.5 g",
+        "route": "IV",
+        "reason": "Broad-spectrum coverage",
+        "priority": 3
+      }
+    ],
+    "medicationAlerts": [],
+    "contraindicationsTriggered": []
+  }
+]

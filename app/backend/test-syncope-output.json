@@ -1,0 +1,34 @@
+[
+  {
+    "name": "CASE 1: Cardiac Syncope",
+    "diagnosis": "Cardiac Syncope",
+    "severity": "Critical",
+    "triageLevel": "RED",
+    "timeToAction": "Immediate",
+    "hemodynamicStatus": "Stable"
+  },
+  {
+    "name": "CASE 2: Vasovagal Syncope",
+    "diagnosis": "Vasovagal Syncope",
+    "severity": "Moderate",
+    "triageLevel": "ORANGE",
+    "timeToAction": "Within 1 hour",
+    "hemodynamicStatus": "Stable"
+  },
+  {
+    "name": "CASE 3: Orthostatic Syncope",
+    "diagnosis": "Orthostatic Syncope",
+    "severity": "Moderate",
+    "triageLevel": "ORANGE",
+    "timeToAction": "Within 1 hour",
+    "hemodynamicStatus": "Stable"
+  },
+  {
+    "name": "CASE 4: Undifferentiated Unstable",
+    "diagnosis": "Syncope (Undifferentiated)",
+    "severity": "Moderate",
+    "triageLevel": "ORANGE",
+    "timeToAction": "Within 1 hour",
+    "hemodynamicStatus": "Unstable"
+  }
+]

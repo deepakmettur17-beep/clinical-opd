@@ -1,0 +1,850 @@
+{
+  "hospitalState": {
+    "totalPatients": 4,
+    "icuBedsAvailable": 0,
+    "ventilatorsAvailable": 0
+  },
+  "triage": [
+    {
+      "patientId": "PATIENT_A_SEPSIS_ARDS",
+      "priority": "CRITICAL",
+      "cdssOutput": {
+        "oneLineSummary": "Probable Sepsis – urgent fluids and antibiotics required",
+        "primaryDiagnosis": "Sepsis / Septic Shock",
+        "differentials": [
+          "Anaphylaxis",
+          "Cardiogenic shock"
+        ],
+        "confidence": "High",
+        "severity": "CRITICAL",
+        "hemodynamicStatus": "Stable",
+        "highRiskFeatures": [],
+        "triageLevel": null,
+        "timeToAction": null,
+        "monitoringPlan": [],
+        "riskScores": {
+          "killip": null,
+          "grace": null
+        },
+        "immediatePlan": [
+          "Obtain IV access (2 large bore)",
+          "Draw blood cultures & lactate",
+          "Administer broad-spectrum IV antibiotics",
+          "Start 30mL/kg IV crystalloid fluid bolus",
+          "Monitor closely for ICU transfer"
+        ],
+        "treatmentPlan": "Immediate Fluid Resuscitation and Antibiotics",
+        "actionChecklist": [
+          {
+            "step": 1,
+            "action": "Draw Blood Cultures",
+            "urgency": "Immediate"
+          },
+          {
+            "step": 2,
+            "action": "Administer IV Antibiotics",
+            "urgency": "Immediate"
+          },
+          {
+            "step": 3,
+            "action": "Administer IV Fluids",
+            "urgency": "High"
+          }
+        ],
+        "safetyAlerts": [
+          "Do not delay antibiotics beyond 1 hour",
+          "Reassess BP frequently during fluid bolus"
+        ],
+        "transferNeeded": true,
+        "alerts": [
+          "Consider transfer to facility with ICU capabilities if non-responsive to fluids."
+        ],
+        "disposition": "Evaluate",
+        "riskScore": null,
+        "thrombolysisEligible": null,
+        "timeSinceOnset": null,
+        "strokeTypeSuggestion": null,
+        "contraindicationsCheck": [],
+        "doorToNeedleTarget": null,
+        "neurologicalSeverity": null,
+        "abcdeStatus": null,
+        "labInsights": [
+          "Possible shock"
+        ],
+        "treatments": [
+          {
+            "drug": "IV Fluids (NS/RL)",
+            "dose": "2400 ml",
+            "route": "IV",
+            "reason": "Fluid resuscitation (SSC Guideline)",
+            "priority": 1
+          },
+          {
+            "drug": "Noradrenaline",
+            "dose": "0.05 - 0.1 mcg/kg/min",
+            "route": "IV Infusion",
+            "reason": "Vasopressor support for persistent shock",
+            "priority": 2
+          },
+          {
+            "drug": "Piperacillin-Tazobactam",
+            "dose": "4.5 g",
+            "route": "IV",
+            "reason": "Broad-spectrum coverage",
+            "priority": 3
+          }
+        ],
+        "dischargeSummary": "CHIEF COMPLAINT:\nPatient presented with fever and confusion.\n\nCLINICAL FINDINGS:\nVitals on arrival: BP 70/40, Pulse 130 bpm, SpO2 82%.\nLab Insights: Possible shock.\n\nDIAGNOSIS:\nDiagnosed with Sepsis / Septic Shock.\n\nTREATMENT GIVEN:\n- undefined: 2400 ml\n- undefined: 0.05 - 0.1 mcg/kg/min\n- undefined: 4.5 g\n\nHOSPITAL COURSE:\nPatient was stabilized with appropriate medical management.\n\nSTATUS / DISPOSITION:\nPatient is stable at discharge.\n\nADVICE / PLAN:\n- Follow up with primary care in 3-5 days.\n- Return to ER immediately if symptoms worsen.",
+        "historyTemplate": {
+          "coreQuestions": [
+            "Onset",
+            "Duration",
+            "Progression",
+            "Severity",
+            "Aggravating factors",
+            "Relieving factors"
+          ],
+          "associatedSymptoms": [
+            "Chills",
+            "Cough",
+            "Urinary symptoms"
+          ],
+          "redFlags": [
+            "Altered sensorium",
+            "Hypotension"
+          ],
+          "optionalQuestions": [
+            "Past similar episodes",
+            "Recent travel",
+            "Current medications"
+          ],
+          "mandatoryBackground": [
+            "Past medical history",
+            "Past surgical history",
+            "Drug allergy",
+            "Current medications",
+            "Habits"
+          ]
+        },
+        "missingCriticalQuestions": [
+          "Onset not assessed",
+          "Duration not assessed",
+          "Progression not assessed",
+          "Severity not assessed",
+          "Aggravating factors not assessed",
+          "Relieving factors not assessed",
+          "Altered sensorium not asked (critical red flag)",
+          "Hypotension not asked (critical red flag)",
+          "Past medical history not documented (medico-legal risk)",
+          "Past surgical history not documented (medico-legal risk)",
+          "Drug allergy not documented (medico-legal risk)",
+          "Current medications not documented (medico-legal risk)",
+          "Habits not documented (medico-legal risk)"
+        ],
+        "clinicalSuggestions": [
+          "Send lactate",
+          "Start IV fluids immediately"
+        ],
+        "medicationAlerts": [],
+        "contraindicationsTriggered": [],
+        "escalation": "IMMEDIATE ICU INTERVENTION REQUIRED",
+        "risk": null,
+        "shockType": "Septic Shock",
+        "ventilation": {
+          "mode": "Volume Control / SIMV",
+          "settings": {
+            "tidalVolume": "480 ml (6 ml/kg)",
+            "peep": "8-10 cm H2O (ARDS Protocol)",
+            "fio2": "Titrate to SpO2 > 92%"
+          }
+        },
+        "auditLog": {
+          "timestamp": "2026-03-21T19:32:56.994Z",
+          "version": "2.0",
+          "engine": "Hospital OS Layer",
+          "decisionTrace": [
+            {
+              "step": "Data Injection",
+              "result": "Patient data received for diagnosis: Sepsis / Septic Shock"
+            },
+            {
+              "step": "Hemodynamic Engine",
+              "result": "Classified Septic Shock (MAP <65 or SBP <90 w/ Lactate >2)"
+            },
+            {
+              "step": "Ventilation Engine",
+              "result": "Triggered Mechanical Ventilation (Volume Control). ARDS/Intubation threshold met."
+            },
+            {
+              "step": "Severity Engine",
+              "result": "Escalated to CRITICAL status due to overt organ failure or severe risk markers."
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added IV Fluids (NS/RL) successfully to pipeline."
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Noradrenaline successfully to pipeline."
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Piperacillin-Tazobactam successfully to pipeline."
+            },
+            {
+              "step": "Audit Engine Layer",
+              "result": "PASSED: All safety and sequencing parameters validated."
+            },
+            {
+              "step": "Global Triage Engine",
+              "result": "System calculated comparative systemic priority as CRITICAL"
+            },
+            {
+              "step": "Resource Allocation",
+              "result": "Allocated 1 ICU Bed. Remaining: 0"
+            },
+            {
+              "step": "Resource Allocation",
+              "result": "Allocated 1 Mechanical Ventilator. Remaining: 0"
+            }
+          ]
+        }
+      },
+      "action": "ADMIT TO ICU",
+      "escalation": "IMMEDIATE ICU INTERVENTION REQUIRED",
+      "auditLog": {
+        "timestamp": "2026-03-21T19:32:56.994Z",
+        "version": "2.0",
+        "engine": "Hospital OS Layer",
+        "decisionTrace": [
+          {
+            "step": "Data Injection",
+            "result": "Patient data received for diagnosis: Sepsis / Septic Shock"
+          },
+          {
+            "step": "Hemodynamic Engine",
+            "result": "Classified Septic Shock (MAP <65 or SBP <90 w/ Lactate >2)"
+          },
+          {
+            "step": "Ventilation Engine",
+            "result": "Triggered Mechanical Ventilation (Volume Control). ARDS/Intubation threshold met."
+          },
+          {
+            "step": "Severity Engine",
+            "result": "Escalated to CRITICAL status due to overt organ failure or severe risk markers."
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added IV Fluids (NS/RL) successfully to pipeline."
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Noradrenaline successfully to pipeline."
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Piperacillin-Tazobactam successfully to pipeline."
+          },
+          {
+            "step": "Audit Engine Layer",
+            "result": "PASSED: All safety and sequencing parameters validated."
+          },
+          {
+            "step": "Global Triage Engine",
+            "result": "System calculated comparative systemic priority as CRITICAL"
+          },
+          {
+            "step": "Resource Allocation",
+            "result": "Allocated 1 ICU Bed. Remaining: 0"
+          },
+          {
+            "step": "Resource Allocation",
+            "result": "Allocated 1 Mechanical Ventilator. Remaining: 0"
+          }
+        ]
+      }
+    },
+    {
+      "patientId": "PATIENT_B_EARLY_SHOCK",
+      "priority": "CRITICAL",
+      "cdssOutput": {
+        "oneLineSummary": "Acute stroke outside thrombolysis window – evaluate for thrombectomy",
+        "primaryDiagnosis": "Acute Stroke",
+        "differentials": [
+          {
+            "name": "Ischemic Stroke",
+            "priority": "High"
+          },
+          {
+            "name": "Hemorrhagic Stroke",
+            "priority": "High"
+          },
+          {
+            "name": "Transient Ischemic Attack (TIA)",
+            "priority": "Moderate"
+          },
+          {
+            "name": "Hypoglycemia",
+            "priority": "Moderate"
+          },
+          {
+            "name": "Todd's Paralysis / Seizure",
+            "priority": "Low"
+          }
+        ],
+        "confidence": "High",
+        "severity": "HIGH RISK",
+        "hemodynamicStatus": "Stable",
+        "highRiskFeatures": [],
+        "triageLevel": "RED",
+        "timeToAction": "Immediate",
+        "monitoringPlan": [
+          "Neuro checks every 15 minutes",
+          "Continuous cardiac telemetry",
+          "Monitor blood pressure (per stroke guidelines)"
+        ],
+        "riskScores": {
+          "killip": null,
+          "grace": null
+        },
+        "immediatePlan": [
+          "Activate stroke code",
+          "Check blood glucose",
+          "Obtain CT brain urgently",
+          "Establish IV access",
+          "Clarify 'last seen normal' time"
+        ],
+        "treatmentPlan": "Standard Observation",
+        "actionChecklist": [
+          {
+            "step": 1,
+            "action": "Urgent non-contrast CT Head",
+            "urgency": "Immediate"
+          },
+          {
+            "step": 2,
+            "action": "Neurology/Stroke Consult",
+            "urgency": "Immediate"
+          }
+        ],
+        "safetyAlerts": [
+          "Do not delay CT scan",
+          "Exclude hemorrhage before thrombolysis",
+          "Monitor airway and consciousness"
+        ],
+        "transferNeeded": false,
+        "alerts": [],
+        "disposition": "Admit ICU",
+        "riskScore": null,
+        "thrombolysisEligible": false,
+        "timeSinceOnset": null,
+        "strokeTypeSuggestion": "Likely Ischemic (pending CT)",
+        "contraindicationsCheck": [
+          "Check recent surgery",
+          "Check active bleeding",
+          "Check anticoagulant use"
+        ],
+        "doorToNeedleTarget": "< 60 minutes",
+        "neurologicalSeverity": "Moderate",
+        "abcdeStatus": null,
+        "labInsights": [],
+        "treatments": [
+          {
+            "drug": "Aspirin",
+            "dose": "300 mg",
+            "route": "Oral",
+            "reason": "Secondary antiplatelet prevention",
+            "priority": 3
+          }
+        ],
+        "dischargeSummary": "CHIEF COMPLAINT:\nPatient presented with general weakness.\n\nCLINICAL FINDINGS:\nVitals on arrival: BP 95/55, Pulse 115 bpm, SpO2 N/A%.\nLab Insights: Unremarkable or pending..\n\nDIAGNOSIS:\nDiagnosed with Acute Stroke.\n\nTREATMENT GIVEN:\n- undefined: 300 mg\n\nHOSPITAL COURSE:\nPatient was stabilized with appropriate medical management.\n\nSTATUS / DISPOSITION:\nPatient stabilized and transferred/admitted for ongoing care.\n\nADVICE / PLAN:\n- Pending inpatient/ICU disposition orders.\n- Family informed of condition.",
+        "historyTemplate": {
+          "coreQuestions": [
+            "Onset",
+            "Duration",
+            "Progression",
+            "Severity",
+            "Aggravating factors",
+            "Relieving factors"
+          ],
+          "associatedSymptoms": [],
+          "redFlags": [],
+          "optionalQuestions": [
+            "Past similar episodes",
+            "Recent travel",
+            "Current medications"
+          ],
+          "mandatoryBackground": [
+            "Past medical history",
+            "Past surgical history",
+            "Drug allergy",
+            "Current medications",
+            "Habits"
+          ]
+        },
+        "missingCriticalQuestions": [
+          "Onset not assessed",
+          "Duration not assessed",
+          "Progression not assessed",
+          "Severity not assessed",
+          "Aggravating factors not assessed",
+          "Relieving factors not assessed",
+          "Past medical history not documented (medico-legal risk)",
+          "Past surgical history not documented (medico-legal risk)",
+          "Drug allergy not documented (medico-legal risk)",
+          "Current medications not documented (medico-legal risk)",
+          "Habits not documented (medico-legal risk)"
+        ],
+        "clinicalSuggestions": [
+          "Evaluate for thrombectomy"
+        ],
+        "medicationAlerts": [],
+        "contraindicationsTriggered": [
+          "Standard therapy withheld: Alteplase due to Eligibility limits (Time Window / Baseline Safety)"
+        ],
+        "escalation": "PRE-EMPTIVE ICU INTERVENTION REQUIRED",
+        "risk": "EARLY SHOCK",
+        "shockType": "",
+        "ventilation": null,
+        "auditLog": {
+          "timestamp": "2026-03-21T19:32:56.995Z",
+          "version": "2.0",
+          "engine": "Hospital OS Layer",
+          "decisionTrace": [
+            {
+              "step": "Data Injection",
+              "result": "Patient data received for diagnosis: Acute Stroke"
+            },
+            {
+              "step": "Predictive Engine",
+              "result": "Identified early deterioration: EARLY SHOCK. Escalated to HIGH RISK."
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Aspirin successfully to pipeline."
+            },
+            {
+              "step": "Audit Engine Layer",
+              "result": "PASSED: All safety and sequencing parameters validated."
+            },
+            {
+              "step": "Global Triage Engine",
+              "result": "System calculated comparative systemic priority as CRITICAL"
+            },
+            {
+              "step": "Resource Allocation",
+              "result": "ICU Allocation FAILED (0 available). Patient Waitlisted."
+            }
+          ]
+        }
+      },
+      "action": "WAITLISTED (ER HOLDING)",
+      "escalation": "NO ICU BED AVAILABLE — TRANSFER REQUIRED",
+      "auditLog": {
+        "timestamp": "2026-03-21T19:32:56.995Z",
+        "version": "2.0",
+        "engine": "Hospital OS Layer",
+        "decisionTrace": [
+          {
+            "step": "Data Injection",
+            "result": "Patient data received for diagnosis: Acute Stroke"
+          },
+          {
+            "step": "Predictive Engine",
+            "result": "Identified early deterioration: EARLY SHOCK. Escalated to HIGH RISK."
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Aspirin successfully to pipeline."
+          },
+          {
+            "step": "Audit Engine Layer",
+            "result": "PASSED: All safety and sequencing parameters validated."
+          },
+          {
+            "step": "Global Triage Engine",
+            "result": "System calculated comparative systemic priority as CRITICAL"
+          },
+          {
+            "step": "Resource Allocation",
+            "result": "ICU Allocation FAILED (0 available). Patient Waitlisted."
+          }
+        ]
+      }
+    },
+    {
+      "patientId": "PATIENT_C_STEMI",
+      "priority": "STABLE",
+      "cdssOutput": {
+        "oneLineSummary": "Routine Evaluation",
+        "primaryDiagnosis": "Non-STEMI or Other",
+        "differentials": [],
+        "confidence": "Low",
+        "severity": "Stable",
+        "hemodynamicStatus": "Stable",
+        "highRiskFeatures": [],
+        "triageLevel": null,
+        "timeToAction": null,
+        "monitoringPlan": [],
+        "riskScores": {
+          "killip": null,
+          "grace": null
+        },
+        "immediatePlan": [],
+        "treatmentPlan": "Standard Observation",
+        "actionChecklist": [],
+        "safetyAlerts": [],
+        "transferNeeded": false,
+        "alerts": [],
+        "disposition": "Evaluate",
+        "riskScore": null,
+        "thrombolysisEligible": null,
+        "timeSinceOnset": null,
+        "strokeTypeSuggestion": null,
+        "contraindicationsCheck": [],
+        "doorToNeedleTarget": null,
+        "neurologicalSeverity": null,
+        "abcdeStatus": null,
+        "labInsights": [],
+        "treatments": [
+          {
+            "drug": "Aspirin",
+            "dose": "325 mg",
+            "route": "Oral",
+            "reason": "Antiplatelet therapy stat",
+            "priority": 2
+          },
+          {
+            "drug": "Clopidogrel",
+            "dose": "300 mg",
+            "route": "Oral",
+            "reason": "P2Y12 inhibitor loading",
+            "priority": 2
+          },
+          {
+            "drug": "Heparin",
+            "dose": "5000 IU",
+            "route": "IV",
+            "reason": "Initial anticoagulation",
+            "priority": 3
+          }
+        ],
+        "dischargeSummary": "CHIEF COMPLAINT:\nPatient presented with crushing chest pain.\n\nCLINICAL FINDINGS:\nVitals on arrival: BP 110/70, Pulse N/A bpm, SpO2 N/A%.\nLab Insights: Unremarkable or pending..\n\nDIAGNOSIS:\nDiagnosed with Non-STEMI or Other.\n\nTREATMENT GIVEN:\n- undefined: 325 mg\n- undefined: 300 mg\n- undefined: 5000 IU\n\nHOSPITAL COURSE:\nPatient was stabilized with appropriate medical management.\n\nSTATUS / DISPOSITION:\nPatient is stable at discharge.\n\nADVICE / PLAN:\n- Follow up with primary care in 3-5 days.\n- Return to ER immediately if symptoms worsen.",
+        "historyTemplate": {
+          "coreQuestions": [
+            "Onset",
+            "Duration",
+            "Progression",
+            "Severity",
+            "Aggravating factors",
+            "Relieving factors",
+            "Radiation",
+            "Nature of pain"
+          ],
+          "associatedSymptoms": [
+            "Sweating",
+            "Breathlessness"
+          ],
+          "redFlags": [
+            "Syncope",
+            "Hypotension"
+          ],
+          "optionalQuestions": [
+            "Past similar episodes",
+            "Recent travel",
+            "Current medications"
+          ],
+          "mandatoryBackground": [
+            "Past medical history",
+            "Past surgical history",
+            "Drug allergy",
+            "Current medications",
+            "Habits"
+          ]
+        },
+        "missingCriticalQuestions": [
+          "Onset not assessed",
+          "Duration not assessed",
+          "Progression not assessed",
+          "Severity not assessed",
+          "Aggravating factors not assessed",
+          "Relieving factors not assessed",
+          "Radiation not assessed",
+          "Nature of pain not assessed",
+          "Syncope not asked (critical red flag)",
+          "Hypotension not asked (critical red flag)",
+          "Past medical history not documented (medico-legal risk)",
+          "Past surgical history not documented (medico-legal risk)",
+          "Drug allergy not documented (medico-legal risk)",
+          "Current medications not documented (medico-legal risk)",
+          "Habits not documented (medico-legal risk)"
+        ],
+        "clinicalSuggestions": [
+          "Activate cath lab immediately",
+          "Do ECG if not done"
+        ],
+        "medicationAlerts": [],
+        "contraindicationsTriggered": [],
+        "escalation": "",
+        "risk": null,
+        "shockType": "",
+        "ventilation": null,
+        "auditLog": {
+          "timestamp": "2026-03-21T19:32:56.995Z",
+          "version": "2.0",
+          "engine": "Hospital OS Layer",
+          "decisionTrace": [
+            {
+              "step": "Data Injection",
+              "result": "Patient data received for diagnosis: Non-STEMI or Other"
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Aspirin successfully to pipeline."
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Clopidogrel successfully to pipeline."
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Heparin successfully to pipeline."
+            },
+            {
+              "step": "Audit Engine Layer",
+              "result": "PASSED: All safety and sequencing parameters validated."
+            },
+            {
+              "step": "Global Triage Engine",
+              "result": "System calculated comparative systemic priority as STABLE"
+            },
+            {
+              "step": "Resource Allocation",
+              "result": "Patient routed to general observation. ICU parameters not met."
+            }
+          ]
+        }
+      },
+      "action": "ADMIT TO WARD / OBSERVATION",
+      "escalation": "",
+      "auditLog": {
+        "timestamp": "2026-03-21T19:32:56.995Z",
+        "version": "2.0",
+        "engine": "Hospital OS Layer",
+        "decisionTrace": [
+          {
+            "step": "Data Injection",
+            "result": "Patient data received for diagnosis: Non-STEMI or Other"
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Aspirin successfully to pipeline."
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Clopidogrel successfully to pipeline."
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Heparin successfully to pipeline."
+          },
+          {
+            "step": "Audit Engine Layer",
+            "result": "PASSED: All safety and sequencing parameters validated."
+          },
+          {
+            "step": "Global Triage Engine",
+            "result": "System calculated comparative systemic priority as STABLE"
+          },
+          {
+            "step": "Resource Allocation",
+            "result": "Patient routed to general observation. ICU parameters not met."
+          }
+        ]
+      }
+    },
+    {
+      "patientId": "PATIENT_D_STABLE",
+      "priority": "STABLE",
+      "cdssOutput": {
+        "oneLineSummary": "Routine Evaluation",
+        "primaryDiagnosis": "Non-STEMI or Other",
+        "differentials": [],
+        "confidence": "Low",
+        "severity": "Stable",
+        "hemodynamicStatus": "Stable",
+        "highRiskFeatures": [],
+        "triageLevel": null,
+        "timeToAction": null,
+        "monitoringPlan": [],
+        "riskScores": {
+          "killip": null,
+          "grace": null
+        },
+        "immediatePlan": [],
+        "treatmentPlan": "Standard Observation",
+        "actionChecklist": [],
+        "safetyAlerts": [],
+        "transferNeeded": false,
+        "alerts": [],
+        "disposition": "Evaluate",
+        "riskScore": null,
+        "thrombolysisEligible": null,
+        "timeSinceOnset": null,
+        "strokeTypeSuggestion": null,
+        "contraindicationsCheck": [],
+        "doorToNeedleTarget": null,
+        "neurologicalSeverity": null,
+        "abcdeStatus": null,
+        "labInsights": [],
+        "treatments": [
+          {
+            "drug": "Aspirin",
+            "dose": "325 mg",
+            "route": "Oral",
+            "reason": "Antiplatelet therapy stat",
+            "priority": 2
+          },
+          {
+            "drug": "Clopidogrel",
+            "dose": "300 mg",
+            "route": "Oral",
+            "reason": "P2Y12 inhibitor loading",
+            "priority": 2
+          },
+          {
+            "drug": "Heparin",
+            "dose": "5000 IU",
+            "route": "IV",
+            "reason": "Initial anticoagulation",
+            "priority": 3
+          }
+        ],
+        "dischargeSummary": "CHIEF COMPLAINT:\nPatient presented with mild headache.\n\nCLINICAL FINDINGS:\nVitals on arrival: BP 120/80, Pulse N/A bpm, SpO2 N/A%.\nLab Insights: Unremarkable or pending..\n\nDIAGNOSIS:\nDiagnosed with Non-STEMI or Other.\n\nTREATMENT GIVEN:\n- undefined: 325 mg\n- undefined: 300 mg\n- undefined: 5000 IU\n\nHOSPITAL COURSE:\nPatient was stabilized with appropriate medical management.\n\nSTATUS / DISPOSITION:\nPatient is stable at discharge.\n\nADVICE / PLAN:\n- Follow up with primary care in 3-5 days.\n- Return to ER immediately if symptoms worsen.",
+        "historyTemplate": {
+          "coreQuestions": [
+            "Onset",
+            "Duration",
+            "Progression",
+            "Severity",
+            "Aggravating factors",
+            "Relieving factors"
+          ],
+          "associatedSymptoms": [],
+          "redFlags": [],
+          "optionalQuestions": [
+            "Past similar episodes",
+            "Recent travel",
+            "Current medications"
+          ],
+          "mandatoryBackground": [
+            "Past medical history",
+            "Past surgical history",
+            "Drug allergy",
+            "Current medications",
+            "Habits"
+          ]
+        },
+        "missingCriticalQuestions": [
+          "Onset not assessed",
+          "Duration not assessed",
+          "Progression not assessed",
+          "Severity not assessed",
+          "Aggravating factors not assessed",
+          "Relieving factors not assessed",
+          "Past medical history not documented (medico-legal risk)",
+          "Past surgical history not documented (medico-legal risk)",
+          "Drug allergy not documented (medico-legal risk)",
+          "Current medications not documented (medico-legal risk)",
+          "Habits not documented (medico-legal risk)"
+        ],
+        "clinicalSuggestions": [
+          "Activate cath lab immediately",
+          "Do ECG if not done"
+        ],
+        "medicationAlerts": [],
+        "contraindicationsTriggered": [],
+        "escalation": "",
+        "risk": null,
+        "shockType": "",
+        "ventilation": null,
+        "auditLog": {
+          "timestamp": "2026-03-21T19:32:56.996Z",
+          "version": "2.0",
+          "engine": "Hospital OS Layer",
+          "decisionTrace": [
+            {
+              "step": "Data Injection",
+              "result": "Patient data received for diagnosis: Non-STEMI or Other"
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Aspirin successfully to pipeline."
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Clopidogrel successfully to pipeline."
+            },
+            {
+              "step": "Treatment Matrix",
+              "result": "Added Heparin successfully to pipeline."
+            },
+            {
+              "step": "Audit Engine Layer",
+              "result": "PASSED: All safety and sequencing parameters validated."
+            },
+            {
+              "step": "Global Triage Engine",
+              "result": "System calculated comparative systemic priority as STABLE"
+            },
+            {
+              "step": "Resource Allocation",
+              "result": "Patient routed to general observation. ICU parameters not met."
+            }
+          ]
+        }
+      },
+      "action": "ADMIT TO WARD / OBSERVATION",
+      "escalation": "",
+      "auditLog": {
+        "timestamp": "2026-03-21T19:32:56.996Z",
+        "version": "2.0",
+        "engine": "Hospital OS Layer",
+        "decisionTrace": [
+          {
+            "step": "Data Injection",
+            "result": "Patient data received for diagnosis: Non-STEMI or Other"
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Aspirin successfully to pipeline."
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Clopidogrel successfully to pipeline."
+          },
+          {
+            "step": "Treatment Matrix",
+            "result": "Added Heparin successfully to pipeline."
+          },
+          {
+            "step": "Audit Engine Layer",
+            "result": "PASSED: All safety and sequencing parameters validated."
+          },
+          {
+            "step": "Global Triage Engine",
+            "result": "System calculated comparative systemic priority as STABLE"
+          },
+          {
+            "step": "Resource Allocation",
+            "result": "Patient routed to general observation. ICU parameters not met."
+          }
+        ]
+      }
+    }
+  ],
+  "alerts": [
+    "RESOURCE LIMIT BREACHED: ICU BEDS FULL",
+    "MULTIPLE CRITICAL PATIENTS - ENACT LOAD BALANCING"
+  ]
+}

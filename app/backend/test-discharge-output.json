@@ -1,0 +1,12 @@
+[
+  {
+    "name": "CASE 1: Mild Allergic Reaction (Discharge)",
+    "diagnosis": "Non-STEMI or Other",
+    "dischargeSummary": "CHIEF COMPLAINT:\nPatient presented with allergic reaction to peanuts.\n\nCLINICAL FINDINGS:\nVitals on arrival: BP 110/70, Pulse 90 bpm, SpO2 99%.\nLab Insights: Unremarkable or pending..\n\nDIAGNOSIS:\nDiagnosed with Non-STEMI or Other.\n\nTREATMENT GIVEN:\nNo critical medications administered.\n\nHOSPITAL COURSE:\nPatient was stabilized with appropriate medical management.\n\nSTATUS / DISPOSITION:\nPatient is stable at discharge.\n\nADVICE / PLAN:\n- Follow up with primary care in 3-5 days.\n- Return to ER immediately if symptoms worsen."
+  },
+  {
+    "name": "CASE 2: Severe Trauma (Admit ICU)",
+    "diagnosis": "Trauma",
+    "dischargeSummary": "CHIEF COMPLAINT:\nPatient presented with rta, unconscious.\n\nCLINICAL FINDINGS:\nVitals on arrival: BP 80/50, Pulse 130 bpm, SpO2 85%.\nLab Insights: Severe anemia, Possible shock.\n\nDIAGNOSIS:\nDiagnosed with Trauma.\n\nTREATMENT GIVEN:\n- IV Fluids / Blood: Titrate to BP\n- Tranexamic Acid (TXA): 1 g over 10 mins\n\nHOSPITAL COURSE:\nPatient was stabilized with appropriate medical management.\n\nSTATUS / DISPOSITION:\nPatient stabilized and transferred/admitted for ongoing care.\n\nADVICE / PLAN:\n- Pending inpatient/ICU disposition orders.\n- Family informed of condition."
+  }
+]

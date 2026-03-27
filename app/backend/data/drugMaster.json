@@ -1,0 +1,53 @@
+[
+  {
+    "genericName": "Glimepiride",
+    "drugClass": "Sulfonylurea",
+    "indications": ["Type 2 Diabetes"],
+    "brands": [
+      { "name": "Amaryl", "strength": "1 mg" },
+      { "name": "Amaryl", "strength": "2 mg" },
+      { "name": "GPride", "strength": "1 mg" },
+      { "name": "Glimy", "strength": "1 mg" }
+    ]
+  },
+  {
+    "genericName": "Metformin",
+    "drugClass": "Biguanide",
+    "indications": ["Type 2 Diabetes"],
+    "brands": [
+      { "name": "Glycomet", "strength": "500 mg" },
+      { "name": "Glycomet", "strength": "1000 mg" },
+      { "name": "Metsmall", "strength": "500 mg" }
+    ]
+  },
+  {
+    "genericName": "Telmisartan",
+    "drugClass": "ARB",
+    "indications": ["Hypertension"],
+    "brands": [
+      { "name": "Telma", "strength": "40 mg" },
+      { "name": "Telma", "strength": "80 mg" },
+      { "name": "Telsar", "strength": "40 mg" }
+    ]
+  },
+  {
+    "genericName": "Aspirin",
+    "drugClass": "Antiplatelet",
+    "indications": ["ACS", "Ischemic Stroke", "Prophylaxis"],
+    "brands": [
+      { "name": "Ecosprin", "strength": "75 mg" },
+      { "name": "Ecosprin", "strength": "150 mg" },
+      { "name": "Loprin", "strength": "75 mg" }
+    ]
+  },
+  {
+    "genericName": "Atorvastatin",
+    "drugClass": "Statin",
+    "indications": ["Dyslipidemia", "ACS"],
+    "brands": [
+      { "name": "Lipivas", "strength": "10 mg" },
+      { "name": "Lipivas", "strength": "20 mg" },
+      { "name": "Atorva", "strength": "10 mg" }
+    ]
+  }
+]

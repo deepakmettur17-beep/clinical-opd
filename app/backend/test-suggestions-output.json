@@ -1,0 +1,24 @@
+[
+  {
+    "name": "CASE 1: STEMI",
+    "diagnosis": "STEMI",
+    "clinicalSuggestions": [
+      "Activate cath lab immediately",
+      "Do ECG if not done"
+    ]
+  },
+  {
+    "name": "CASE 2: Stroke Eligible",
+    "diagnosis": "Acute Stroke",
+    "clinicalSuggestions": [
+      "Start thrombolysis protocol"
+    ]
+  },
+  {
+    "name": "CASE 3: High Risk Syncope",
+    "diagnosis": "Syncope (Undifferentiated)",
+    "clinicalSuggestions": [
+      "Safe discharge with follow-up"
+    ]
+  }
+]

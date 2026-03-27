@@ -1,0 +1,6 @@
+From available data:
+
+• List missing baseline tests
+• List confirmatory tests
+• List monitoring investigations
+• Avoid repeating already available labs

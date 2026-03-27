@@ -1,0 +1,38 @@
+[
+  {
+    "name": "CASE 1: Sepsis",
+    "diagnosis": "Sepsis / Septic Shock",
+    "confidence": "High",
+    "differentials": [
+      "Anaphylaxis",
+      "Cardiogenic shock"
+    ]
+  },
+  {
+    "name": "CASE 2: Acute Heart Failure",
+    "diagnosis": "Acute Heart Failure / Respiratory Distress",
+    "confidence": "Moderate",
+    "differentials": [
+      "Pneumonia",
+      "Pulmonary embolism"
+    ]
+  },
+  {
+    "name": "CASE 3: Anaphylaxis",
+    "diagnosis": "Anaphylactic Shock",
+    "confidence": "High",
+    "differentials": [
+      "Septic shock",
+      "Asthma exacerbation"
+    ]
+  },
+  {
+    "name": "CASE 4: STEMI",
+    "diagnosis": "STEMI",
+    "confidence": "High",
+    "differentials": [
+      "NSTEMI",
+      "Aortic dissection"
+    ]
+  }
+]

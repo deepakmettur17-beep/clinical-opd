@@ -1,0 +1,8 @@
+[
+  { "id": "ph-001", "brand": "Amaryl", "strength": "1 mg", "stockCount": 150, "price": 12.5 },
+  { "id": "ph-002", "brand": "Glycomet", "strength": "500 mg", "stockCount": 0, "price": 5.0 },
+  { "id": "ph-003", "brand": "Telma", "strength": "40 mg", "stockCount": 80, "price": 18.0 },
+  { "id": "ph-004", "brand": "Ecosprin", "strength": "75 mg", "stockCount": 200, "price": 2.5 },
+  { "id": "ph-005", "brand": "Lipivas", "strength": "20 mg", "stockCount": 45, "price": 15.0 },
+  { "id": "ph-006", "brand": "NewBrand-X", "strength": "10 mg", "stockCount": 100, "price": 25.0 }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "CASE 1: Sepsis with Shock & Renal Failure (Pip-Taz Avoided, Ceftriaxone used)",
+    "diagnosis": "Sepsis / Septic Shock",
+    "treatments": [
+      {
+        "drug": "IV Fluids (NS/RL)",
+        "dose": "2100 ml",
+        "route": "IV",
+        "reason": "Fluid resuscitation (SSC Guideline)",
+        "priority": 1
+      },
+      {
+        "drug": "Noradrenaline",
+        "dose": "Titrate MAP >65",
+        "route": "IV",
+        "reason": "Vasopressor support initially",
+        "priority": 1
+      },
+      {
+        "drug": "Ceftriaxone",
+        "dose": "4.5 g",
+        "route": "IV",
+        "reason": "Broad-spectrum coverage",
+        "priority": 2
+      }
+    ],
+    "medicationAlerts": [],
+    "contraindicationsTriggered": [
+      "Avoided Piperacillin-Tazobactam: Acute Renal Impairment (Cr > 2.0)"
+    ]
+  },
+  {
+    "name": "CASE 2: STEMI with Active Bleed (Failsafe Triggered)",
+    "diagnosis": "INSUFFICIENT DATA FOR SAFE RECOMMENDATION"
+  }
+]

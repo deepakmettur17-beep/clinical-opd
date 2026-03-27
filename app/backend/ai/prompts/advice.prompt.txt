@@ -1,0 +1,7 @@
+Generate patient advice:
+
+• Warning signs
+• Diet / activity
+• Review interval
+• Admission suggestion if risk present
+• Keep language patient-friendly

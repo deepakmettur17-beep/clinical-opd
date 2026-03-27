@@ -1,0 +1,38 @@
+[
+  {
+    "name": "CASE 1: Sepsis with Penicillin Allergy (Uses Fallback instead of Pip-Taz)",
+    "diagnosis": "Sepsis / Septic Shock",
+    "medications": [
+      {
+        "name": "Meropenem",
+        "dose": "4.5 g",
+        "route": "IV",
+        "indication": "Broad-spectrum coverage (Alternative used due to allergy)"
+      },
+      {
+        "name": "IV Fluids (NS/RL)",
+        "dose": "2100 ml",
+        "route": "IV",
+        "indication": "Fluid resuscitation (30 ml/kg)"
+      }
+    ]
+  },
+  {
+    "name": "CASE 2: STEMI with Aspirin Allergy (Avoids Aspirin entirely)",
+    "diagnosis": "STEMI",
+    "medications": [
+      {
+        "name": "Clopidogrel",
+        "dose": "325 mg",
+        "route": "Oral",
+        "indication": "Antiplatelet therapy stat (Alternative used due to allergy)"
+      },
+      {
+        "name": "Heparin",
+        "dose": "5000 IU",
+        "route": "IV",
+        "indication": "Initial anticoagulation"
+      }
+    ]
+  }
+]

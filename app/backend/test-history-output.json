@@ -1,0 +1,90 @@
+[
+  {
+    "name": "CASE 1: Chest Pain",
+    "diagnosis": "Non-STEMI or Other",
+    "historyTemplate": {
+      "coreQuestions": [
+        "Onset",
+        "Duration",
+        "Progression",
+        "Severity",
+        "Aggravating factors",
+        "Relieving factors",
+        "Radiation",
+        "Nature of pain"
+      ],
+      "associatedSymptoms": [
+        "Sweating",
+        "Breathlessness"
+      ],
+      "redFlags": [
+        "Syncope",
+        "Hypotension"
+      ],
+      "optionalQuestions": [
+        "Past similar episodes",
+        "Recent travel",
+        "Current medications"
+      ]
+    }
+  },
+  {
+    "name": "CASE 2: Fever & Breathlessness",
+    "diagnosis": "Febrile Illness / Suspected Infection",
+    "historyTemplate": {
+      "coreQuestions": [
+        "Onset",
+        "Duration",
+        "Progression",
+        "Severity",
+        "Aggravating factors",
+        "Relieving factors",
+        "Orthopnea",
+        "Paroxysmal nocturnal dyspnea (PND)"
+      ],
+      "associatedSymptoms": [
+        "Chills",
+        "Cough",
+        "Urinary symptoms",
+        "Wheeze",
+        "Edema"
+      ],
+      "redFlags": [
+        "Altered sensorium",
+        "Hypotension",
+        "Low SpO2"
+      ],
+      "optionalQuestions": [
+        "Past similar episodes",
+        "Recent travel",
+        "Current medications"
+      ]
+    }
+  },
+  {
+    "name": "CASE 3: Syncope",
+    "diagnosis": "Syncope (Undifferentiated)",
+    "historyTemplate": {
+      "coreQuestions": [
+        "Onset",
+        "Duration",
+        "Progression",
+        "Severity",
+        "Aggravating factors",
+        "Relieving factors",
+        "Prodrome",
+        "Triggers"
+      ],
+      "associatedSymptoms": [],
+      "redFlags": [
+        "Sudden onset",
+        "No warning signs"
+      ],
+      "optionalQuestions": [
+        "Past similar episodes",
+        "Recent travel",
+        "Current medications"
+      ]
+    }
+  }
+]

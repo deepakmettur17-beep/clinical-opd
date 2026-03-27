@@ -1,0 +1,18 @@
+[
+  {
+    "name": "CASE 1: Perfect History (No Missing)",
+    "diagnosis": "Non-STEMI or Other",
+    "missingCriticalQuestions": [
+      "Past medical history not documented (medico-legal risk)",
+      "Past surgical history not documented (medico-legal risk)",
+      "Drug allergy not documented (medico-legal risk)",
+      "Current medications not documented (medico-legal risk)",
+      "Habits not documented (medico-legal risk)",
+      "Surgical history not documented (medico-legal risk)",
+      "Incomplete history — clinical risk cannot be fully excluded"
+    ]
+  },
+  {
+    "name": "CASE 2: Missing Core & Red Flags"
+  }
+]

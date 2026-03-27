@@ -1,0 +1,56 @@
+[
+  {
+    "name": "CASE 1: Acute Stroke (Eligible)",
+    "diagnosis": "Acute Stroke",
+    "severity": "Critical",
+    "triageLevel": "RED",
+    "timeToAction": "Immediate",
+    "thrombolysisEligible": true,
+    "timeSinceOnset": 180,
+    "oneLineSummary": "Acute Stroke (180 mins) – THROMBOLYSIS CANDIDATE",
+    "immediatePlan": [
+      "Activate stroke code",
+      "Check blood glucose",
+      "Obtain CT brain urgently",
+      "Establish IV access",
+      "Prepare thrombolysis if eligible"
+    ],
+    "disposition": "Admit ICU"
+  },
+  {
+    "name": "CASE 2: Acute Stroke (Ineligible)",
+    "diagnosis": "Acute Stroke",
+    "severity": "Critical",
+    "triageLevel": "RED",
+    "timeToAction": "Immediate",
+    "thrombolysisEligible": false,
+    "timeSinceOnset": 300,
+    "oneLineSummary": "Acute Stroke (300 mins) – OUTSIDE thrombolysis window",
+    "immediatePlan": [
+      "Activate stroke code",
+      "Check blood glucose",
+      "Obtain CT brain urgently",
+      "Establish IV access",
+      "Assess for endovascular thrombectomy (EVT) eligibility"
+    ],
+    "disposition": "Admit ICU"
+  },
+  {
+    "name": "CASE 3: Stroke (Unknown Onset)",
+    "diagnosis": "Acute Stroke",
+    "severity": "Critical",
+    "triageLevel": "RED",
+    "timeToAction": "Immediate",
+    "thrombolysisEligible": false,
+    "timeSinceOnset": null,
+    "oneLineSummary": "Acute Stroke (Unknown onset) – clarify last seen normal time",
+    "immediatePlan": [
+      "Activate stroke code",
+      "Check blood glucose",
+      "Obtain CT brain urgently",
+      "Establish IV access",
+      "Clarify 'last seen normal' time"
+    ],
+    "disposition": "Admit ICU"
+  }
+]

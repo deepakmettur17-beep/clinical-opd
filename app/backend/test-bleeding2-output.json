@@ -1,0 +1,54 @@
+[
+  {
+    "name": "CASE 1: Bleeding w/ Cirrhosis (Stable)",
+    "diagnosis": "Upper GI Bleed",
+    "severity": "Moderate",
+    "triageLevel": "ORANGE",
+    "timeToAction": "Within 1 hour",
+    "differentials": [
+      {
+        "name": "Variceal bleed",
+        "priority": "High"
+      },
+      {
+        "name": "Peptic ulcer",
+        "priority": "Moderate"
+      },
+      {
+        "name": "Gastritis",
+        "priority": "Low"
+      }
+    ],
+    "monitoringPlan": [
+      "Check BP every 5 minutes",
+      "Monitor urine output",
+      "Continuous pulse oximetry"
+    ]
+  },
+  {
+    "name": "CASE 2: Massive GI Bleed (Unstable)",
+    "diagnosis": "Upper GI Bleed",
+    "severity": "Critical",
+    "triageLevel": "RED",
+    "timeToAction": "Immediate",
+    "differentials": [
+      {
+        "name": "Variceal bleed",
+        "priority": "High"
+      },
+      {
+        "name": "Peptic ulcer",
+        "priority": "Moderate"
+      },
+      {
+        "name": "Gastritis",
+        "priority": "Low"
+      }
+    ],
+    "monitoringPlan": [
+      "Check BP every 5 minutes",
+      "Monitor urine output",
+      "Continuous pulse oximetry"
+    ]
+  }
+]

@@ -1,0 +1,88 @@
+[
+  {
+    "name": "CASE 1: Sepsis with Piperacillin Allergy",
+    "diagnosis": "Sepsis / Septic Shock",
+    "treatments": [
+      {
+        "drug": "IV Fluids (NS/RL)",
+        "dose": "2100 ml",
+        "route": "IV",
+        "reason": "Fluid resuscitation (SSC Guideline)",
+        "priority": 1
+      },
+      {
+        "drug": "Noradrenaline",
+        "dose": "0.05 - 0.1 mcg/kg/min",
+        "route": "IV Infusion",
+        "reason": "Vasopressor support for persistent shock",
+        "priority": 2
+      },
+      {
+        "drug": "Ceftriaxone",
+        "dose": "4.5 g",
+        "route": "IV",
+        "reason": "Broad-spectrum coverage",
+        "priority": 3
+      }
+    ],
+    "medicationAlerts": [
+      "CRITICAL: Piperacillin-Tazobactam avoided due to allergy",
+      "Modified due to documented allergy — Ceftriaxone substituted for original first-line agent"
+    ],
+    "contraindicationsTriggered": []
+  },
+  {
+    "name": "CASE 2: STEMI with Aspirin Allergy",
+    "diagnosis": "STEMI",
+    "treatments": [
+      {
+        "drug": "Clopidogrel",
+        "dose": "325 mg",
+        "route": "Oral",
+        "reason": "Antiplatelet therapy stat",
+        "priority": 2
+      },
+      {
+        "drug": "Heparin",
+        "dose": "5000 IU",
+        "route": "IV",
+        "reason": "Initial anticoagulation",
+        "priority": 3
+      }
+    ],
+    "medicationAlerts": [
+      "CRITICAL: Aspirin avoided due to allergy",
+      "Modified due to documented allergy — Clopidogrel substituted for original first-line agent"
+    ],
+    "contraindicationsTriggered": []
+  },
+  {
+    "name": "CASE 3: Normal Trauma",
+    "diagnosis": "Trauma",
+    "treatments": [
+      {
+        "drug": "Oxygen",
+        "dose": "15 L/min",
+        "route": "Inhalation",
+        "reason": "Airway/Breathing support",
+        "priority": 1
+      },
+      {
+        "drug": "IV Fluids (NS/RL)",
+        "dose": "Titrate to BP",
+        "route": "IV",
+        "reason": "Circulation support (ATLS)",
+        "priority": 2
+      },
+      {
+        "drug": "Tranexamic Acid",
+        "dose": "1 g over 10 mins",
+        "route": "IV",
+        "reason": "Hemorrhage control",
+        "priority": 3
+      }
+    ],
+    "medicationAlerts": [],
+    "contraindicationsTriggered": []
+  }
+]

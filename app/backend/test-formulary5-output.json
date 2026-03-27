@@ -1,0 +1,17 @@
+[
+  {
+    "name": "CASE 1: Sepsis Temporal Dependency Violation test (Fluid Allergy prevents fluid administration but allows Vasopressor attempt)",
+    "diagnosis": "UNSAFE TREATMENT PLAN — BLOCKED BY AUDIT ENGINE",
+    "auditDetails": {
+      "status": "REJECTED",
+      "issues": [
+        "Temporal Dependency Violated: Vasopressors MUST NOT precede fluids"
+      ]
+    }
+  },
+  {
+    "name": "CASE 2: Sepsis Missing Antibiotics Simulation test (Piperacillin and Ceftriaxone allergy hits completeness audit check)",
+    "diagnosis": "Febrile Illness / Suspected Infection",
+    "auditDetails": "No Audit Dump"
+  }
+]

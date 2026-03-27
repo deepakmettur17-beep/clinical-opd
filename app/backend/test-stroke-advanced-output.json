@@ -1,0 +1,18 @@
+[
+  {
+    "name": "CASE 1: Hemorrhagic & Severe (3 deficits, BP 190/100)",
+    "diagnosis": "Acute Stroke",
+    "neurologicalSeverity": "Severe",
+    "strokeTypeSuggestion": "Possible Hemorrhagic – urgent CT required",
+    "contraindicationsCheck": [
+      "Check recent surgery",
+      "Check active bleeding",
+      "Check anticoagulant use"
+    ],
+    "doorToNeedleTarget": "< 60 minutes",
+    "oneLineSummary": "Acute stroke outside thrombolysis window – evaluate for thrombectomy"
+  },
+  {
+    "name": "CASE 2: Ischemic & Eligible (1 deficit, BP 140/80)"
+  }
+]

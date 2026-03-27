@@ -1,0 +1,15 @@
+C:\Users\HP\Desktop\Clinical-opd-system\app\backend\services\treatmentEngine.js:299
+    let finalDrug = preferred;
+        ^
+
+SyntaxError: Identifier 'finalDrug' has already been declared
+    at wrapSafe (node:internal/modules/cjs/loader:1743:18)
+    at Module._compile (node:internal/modules/cjs/loader:1786:20)
+    at Object..js (node:internal/modules/cjs/loader:1943:10)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1556:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (C:\Users\HP\Desktop\Clinical-opd-system\verify-to-file.js:3:14)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)

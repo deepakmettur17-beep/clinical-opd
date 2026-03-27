@@ -1,0 +1,13 @@
+[
+  {
+    "name": "CASE 1: Early Shock Tracker Test (MAP 68, Falling trend, Lactate 1.5 Rising, Pulse 110)",
+    "diagnosis": "Acute Stroke",
+    "risk": "EARLY SHOCK",
+    "severity": "HIGH RISK",
+    "escalation": "PRE-EMPTIVE ICU INTERVENTION REQUIRED"
+  },
+  {
+    "name": "CASE 2: Impending Respiratory Failure Test (SpO2 93, Falling trend)",
+    "diagnosis": "INSUFFICIENT DATA FOR SAFE RECOMMENDATION"
+  }
+]

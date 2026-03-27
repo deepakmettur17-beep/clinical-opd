@@ -1,0 +1,14 @@
+[
+  {
+    "name": "TEST 1: Input Validation Firewall (Invalid BP = 500/400)",
+    "response": {}
+  },
+  {
+    "name": "TEST 2: Normal Valid Request",
+    "response": {}
+  },
+  {
+    "name": "TEST 3: Idempotency Dedup (Push identical RequestId)",
+    "response": {}
+  }
+]

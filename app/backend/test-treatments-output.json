@@ -1,0 +1,56 @@
+[
+  {
+    "name": "CASE 1: Sepsis (Weight 80kg)",
+    "diagnosis": "Sepsis / Septic Shock",
+    "medications": [
+      {
+        "name": "Piperacillin-Tazobactam",
+        "dose": "4.5 g",
+        "route": "IV",
+        "indication": "Broad-spectrum coverage"
+      },
+      {
+        "name": "IV Fluids (NS/RL)",
+        "dose": "2400 ml",
+        "route": "IV",
+        "indication": "Fluid resuscitation (30 ml/kg)"
+      }
+    ]
+  },
+  {
+    "name": "CASE 2: Stroke Eligible",
+    "diagnosis": "Acute Stroke",
+    "medications": [
+      {
+        "name": "Alteplase (r-tPA)",
+        "dose": "0.9 mg/kg (Max 90mg)",
+        "route": "IV",
+        "indication": "Thrombolysis for ischemic stroke"
+      }
+    ]
+  },
+  {
+    "name": "CASE 3: STEMI",
+    "diagnosis": "STEMI",
+    "medications": [
+      {
+        "name": "Aspirin",
+        "dose": "325 mg",
+        "route": "Oral",
+        "indication": "Antiplatelet therapy stat"
+      },
+      {
+        "name": "Clopidogrel",
+        "dose": "300 mg",
+        "route": "Oral",
+        "indication": "P2Y12 inhibitor loading"
+      },
+      {
+        "name": "Heparin",
+        "dose": "5000 IU",
+        "route": "IV",
+        "indication": "Initial anticoagulation"
+      }
+    ]
+  }
+]

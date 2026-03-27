@@ -1,0 +1,76 @@
+[
+  {
+    "name": "CASE 1: Acute Septic Shock w/ ARDS (SpO2 82, MAP < 65, Lactate 5.0)",
+    "diagnosis": "Sepsis / Septic Shock",
+    "shockType": "Septic Shock",
+    "ventilation": {
+      "mode": "Volume Control / SIMV",
+      "settings": {
+        "tidalVolume": "480 ml (6 ml/kg)",
+        "peep": "8-10 cm H2O (ARDS Protocol)",
+        "fio2": "Titrate to SpO2 > 92%"
+      }
+    },
+    "escalation": "IMMEDIATE ICU INTERVENTION REQUIRED",
+    "treatments": [
+      {
+        "drug": "IV Fluids (NS/RL)",
+        "dose": "2400 ml",
+        "route": "IV",
+        "reason": "Fluid resuscitation (SSC Guideline)",
+        "priority": 1
+      },
+      {
+        "drug": "Piperacillin-Tazobactam",
+        "dose": "4.5 g",
+        "route": "IV",
+        "reason": "Broad-spectrum coverage",
+        "priority": 3
+      }
+    ]
+  },
+  {
+    "name": "CASE 2: Undifferentiated Shock w/ Moderate Hypoxia (SpO2 88, MAP < 65, Lactate 1.5)",
+    "diagnosis": "Non-STEMI or Other",
+    "shockType": "Undifferentiated Shock",
+    "ventilation": {
+      "mode": "Non-invasive Ventilation (BiPAP)",
+      "settings": {
+        "ipap": "10 cm H2O",
+        "epap": "5 cm H2O",
+        "fio2": "Titrate to SpO2 > 92%"
+      }
+    },
+    "escalation": "IMMEDIATE ICU INTERVENTION REQUIRED",
+    "treatments": [
+      {
+        "drug": "IV Fluids (NS/RL)",
+        "dose": "250 ml bolus",
+        "route": "IV",
+        "reason": "Supportive care for hypotension",
+        "priority": 1
+      },
+      {
+        "drug": "Aspirin",
+        "dose": "325 mg",
+        "route": "Oral",
+        "reason": "Antiplatelet therapy stat",
+        "priority": 2
+      },
+      {
+        "drug": "Clopidogrel",
+        "dose": "300 mg",
+        "route": "Oral",
+        "reason": "P2Y12 inhibitor loading",
+        "priority": 2
+      },
+      {
+        "drug": "Heparin",
+        "dose": "5000 IU",
+        "route": "IV",
+        "reason": "Initial anticoagulation",
+        "priority": 3
+      }
+    ]
+  }
+]

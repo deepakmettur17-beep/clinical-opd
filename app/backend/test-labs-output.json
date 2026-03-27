@@ -1,0 +1,24 @@
+[
+  {
+    "name": "CASE 1: Full Derangement",
+    "diagnosis": "Acute Stroke",
+    "labInsights": [
+      "Severe anemia",
+      "Renal impairment",
+      "Possible shock",
+      "Infection / sepsis"
+    ]
+  },
+  {
+    "name": "CASE 2: Partial Derangement",
+    "diagnosis": "Febrile Illness / Suspected Infection",
+    "labInsights": [
+      "Infection / sepsis"
+    ]
+  },
+  {
+    "name": "CASE 3: Normal Labs",
+    "diagnosis": "Non-STEMI or Other",
+    "labInsights": []
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "name": "CASE 1: High Risk (History + Abnormal ECG + SOB)",
+    "diagnosis": "Cardiac Syncope",
+    "riskScore": {
+      "score": 3,
+      "riskLevel": "High",
+      "reason": [
+        "History of heart disease",
+        "Abnormal ECG",
+        "Associated breathlessness"
+      ]
+    },
+    "disposition": "Admit",
+    "oneLineSummary": "High-risk syncope – requires admission and cardiac evaluation"
+  },
+  {
+    "name": "CASE 2: Moderate Risk (Just SBP < 90)",
+    "diagnosis": "Syncope (Undifferentiated)",
+    "riskScore": {
+      "score": 1,
+      "riskLevel": "Moderate",
+      "reason": [
+        "Systolic BP < 90"
+      ]
+    },
+    "disposition": "Observe",
+    "oneLineSummary": "Undifferentiated syncope – complete basic workup"
+  },
+  {
+    "name": "CASE 3: Low Risk (Unremarkable)",
+    "diagnosis": "Vasovagal Syncope",
+    "riskScore": {
+      "score": 0,
+      "riskLevel": "Low",
+      "reason": []
+    },
+    "disposition": "Discharge",
+    "oneLineSummary": "Likely benign syncope – safe for discharge with advice"
+  }
+]

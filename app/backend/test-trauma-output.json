@@ -1,0 +1,34 @@
+[
+  {
+    "name": "CASE 1: Critical Trauma (Unconscious + Hypotensive)",
+    "diagnosis": "Trauma",
+    "severity": "Critical",
+    "triageLevel": "RED",
+    "timeToAction": "Immediate",
+    "abcdeStatus": {
+      "airway": true,
+      "breathing": false,
+      "circulation": true,
+      "disability": true,
+      "exposure": true
+    },
+    "disposition": "Admit ICU / Emergency Surgery",
+    "oneLineSummary": "Major trauma with ABC compromise – immediate resuscitation required"
+  },
+  {
+    "name": "CASE 2: Moderate Trauma (Stable Vitals, Conscious)",
+    "diagnosis": "Trauma",
+    "severity": "Moderate",
+    "triageLevel": "ORANGE",
+    "timeToAction": "Immediate",
+    "abcdeStatus": {
+      "airway": false,
+      "breathing": false,
+      "circulation": false,
+      "disability": false,
+      "exposure": true
+    },
+    "disposition": "Observation",
+    "oneLineSummary": "Trauma evaluation – stabilize and assess for isolated injuries"
+  }
+]

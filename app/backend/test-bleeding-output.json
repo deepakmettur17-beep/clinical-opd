@@ -1,0 +1,37 @@
+[
+  {
+    "name": "CASE 1: Upper GI Bleed (Melena)",
+    "diagnosis": "Upper GI Bleed",
+    "severity": "Moderate",
+    "immediatePlan": [
+      "Establish 2 large bore IVs",
+      "Type and crossmatch blood",
+      "Start IV PPI (e.g., Pantoprazole)",
+      "Consider Octreotide if variceal suspected",
+      "Keep NPO and consult Gastroenterology"
+    ]
+  },
+  {
+    "name": "CASE 2: Upper GI Bleed w/ Shock",
+    "diagnosis": "Upper GI Bleed",
+    "severity": "Critical",
+    "immediatePlan": [
+      "Activate Massive Transfusion Protocol if bleeding life-threatening",
+      "Establish 2 large bore IVs",
+      "Type and crossmatch blood",
+      "Start IV PPI (e.g., Pantoprazole)",
+      "Consider Octreotide if variceal suspected"
+    ]
+  },
+  {
+    "name": "CASE 3: Lower GI Bleed",
+    "diagnosis": "Lower GI Bleed",
+    "severity": "Moderate",
+    "immediatePlan": [
+      "Establish large bore IV access",
+      "Type and crossmatch blood",
+      "Monitor closely for significant drop in hemoglobin",
+      "Keep NPO and consult Gastroenterology"
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+Based on the same patient data:
+
+• Suggest first-line treatment options
+• Mention dose ranges (not fixed orders)
+• Adjust for age, renal function, pregnancy
+• Mention alternatives
+• Do NOT prescribe definitively
+• No absolute language
