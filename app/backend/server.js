@@ -28,13 +28,24 @@ const { generateVerifiablePDF, verifyPDF } = require('./services/pdfEngine');
 const { generateBillingIntelligence } = require('./services/billingEngine');
 const { runClaimAutoFixEngine, runClaimGuard } = require('./services/ClaimAutoFixEngine');
 const { runHospitalOS } = require("./services/hospitalOrchestrator");
+const { generatePatientMessage } = require("./services/quickExplain");
 const { runTriageEngine } = require("./services/triageEngine");
 const clinicalExecutionLogs = new Map(); // caseId -> in-memory fallback
 const lastActionAtMap      = new Map(); // caseId -> timestamp of last completed step
 
 const app = express();
-app.use(cors({ origin: '*' }));
-app.use(express.json());
+const corsOptions = {
+  origin: '*',
+  methods: ["GET", "POST"],
+  credentials: true
+};
+app.use(cors(corsOptions));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true, service: 'clinical-opd-backend' });
+});
 
 const server = http.createServer(app);
 const io = new Server(server, { cors: corsOptions });
@@ -211,7 +222,7 @@ app.get('/api/system/icu-analytics', requireAuth, async (req, res) => {
     
     let alerts = [];
     if (parseFloat(extubationFailureRate) > 15) {
-        alerts.push({ msg: "⚠️ High extubation failure rate — review weaning protocol", type: "warning" });
+        alerts.push({ msg: "âš ï¸ High extubation failure rate â€” review weaning protocol", type: "warning" });
     }
     
     res.json({
@@ -316,7 +327,7 @@ let isRedisAvailable = false;
         redisClient = createClient({ url: process.env.REDIS_URL || 'redis://localhost:6379' });
         ...
     } catch (err) {
-        logger.warn(`Redis unavailable — fallback active: ${err.message}`);
+        logger.warn(`Redis unavailable â€” fallback active: ${err.message}`);
         isRedisAvailable = false;
     }
 })(); */
@@ -422,7 +433,7 @@ io.on("connection", (socket) => {
      io.emit('pathway_execution_update', { caseId, compliance });
      logger.info(`Execution [${caseId}]: Score=${compliance.complianceScore} Complete=${compliance.completionRate}%`);
 
-     // ─── Run Smart Suggestion Engine
+     // â”€â”€â”€ Run Smart Suggestion Engine
      const pt = activePatients.get(caseId);
      if (pt && pt.fullData?.ventilatorStatus?.predictiveIntel) {
         const { clinicalPathway, predictedRisk, riskScore, trends } = pt.fullData.ventilatorStatus.predictiveIntel;
@@ -438,7 +449,7 @@ io.on("connection", (socket) => {
         logger.info(`Suggestion [${caseId}]: ${suggestion.topSuggestion?.action}`);
      }
 
-     // ─── Emit critical SLA breach alert for MISSED IMMEDIATE steps
+     // â”€â”€â”€ Emit critical SLA breach alert for MISSED IMMEDIATE steps
      if (compliance.criticalAlerts && compliance.criticalAlerts.length > 0) {
         compliance.criticalAlerts.forEach(alert => {
            io.emit('sla_breach_critical', { caseId, ...alert });
@@ -446,13 +457,13 @@ io.on("connection", (socket) => {
         });
      }
 
-     // ─── Emit poor compliance alert if score < 70
+     // â”€â”€â”€ Emit poor compliance alert if score < 70
      if (compliance.poorCompliance) {
         io.emit('poor_compliance_alert', {
            caseId,
            complianceScore: compliance.complianceScore,
            missedSteps:     compliance.missedSteps,
-           message:         `⚠️ Clinical compliance score dropped to ${compliance.complianceScore}/100`,
+           message:         `âš ï¸ Clinical compliance score dropped to ${compliance.complianceScore}/100`,
         });
         logger.warn(`POOR COMPLIANCE [${caseId}]: ${compliance.complianceScore}/100`);
      }
@@ -490,7 +501,7 @@ io.on("connection", (socket) => {
             currentAlert.noActionTaken = true;
             activeAlerts.set(caseId, currentAlert);
             io.to('CONSULTANT').emit('critical_alert', currentAlert);
-            console.log(`🚨 ALERT ${caseId} RE-ESCALATED: NO ACTION LOGGED IN 120s`);
+            console.log(`ðŸš¨ ALERT ${caseId} RE-ESCALATED: NO ACTION LOGGED IN 120s`);
          }
       }, 120000);
     }
@@ -615,7 +626,7 @@ io.on("connection", (socket) => {
                 if (curSpo2 > 0 && curSpo2 < failSpo2) alerts.push(`SpO2 ${curSpo2}% < ${failSpo2}%`);
                 if (curRr > 0 && curRr > failRr) alerts.push(`RR ${curRr} > ${failRr}`);
                 if (curHr > 0 && curHr > failHr) alerts.push(`HR ${curHr} > ${failHr}`);
-                recs.push("POST-EXTUBATION FAILURE — consider NIV or reintubation immediately");
+                recs.push("POST-EXTUBATION FAILURE â€” consider NIV or reintubation immediately");
                 
                 io.emit('critical_alert', {
                    caseId: pt.caseId, patientName: pt.patientName,
@@ -624,10 +635,10 @@ io.on("connection", (socket) => {
                 });
             } else if (elapsedMins >= 120) {
                 peStatus = 'SUCCESS';
-                alerts.push("Extubation successful — continue monitoring");
+                alerts.push("Extubation successful â€” continue monitoring");
             } else {
                 peStatus = rLevel === 'HIGH' ? 'AT RISK' : 'STABLE';
-                if (rLevel === 'HIGH') alerts.push("High-risk patient — monitor closely");
+                if (rLevel === 'HIGH') alerts.push("High-risk patient â€” monitor closely");
             }
             
             pt.fullData.ventilatorStatus.postExtubation = { status: peStatus, timeSinceExtubation: Math.floor(elapsedMins), alerts, recs };
@@ -665,13 +676,13 @@ io.on("connection", (socket) => {
              if ((curRr > 35 && curRr !== 0) || (curSpo2 < 90 && curSpo2 !== 0) || (curHr > 140 && curHr !== 0)) {
                  sbtUpdate.state = 'FAILED';
                  sbtUpdate.failures = (sbtUpdate.failures || 0) + 1;
-                 sbtUpdate.failureReason = "SBT FAILED — resume ventilator support (Patient not ready for extubation — reassess later)";
+                 sbtUpdate.failureReason = "SBT FAILED â€” resume ventilator support (Patient not ready for extubation â€” reassess later)";
                  if (!pt.tasks) pt.tasks = [];
                  pt.tasks.push({ id: Date.now().toString(), task: "Resume full ventilator support", assignedTo: "Doctor", assignedBy: {name: 'Engine'}, status: 'pending', createdAt: Date.now(), dueBy: Date.now() + 300000, escalationLevel: 0 });
                  logger.error(`SBT FAILED for ${caseId} at ${elapsedMinutes.toFixed(1)} mins`);
              } else if (elapsedMinutes >= 30) {
                  sbtUpdate.state = 'SUCCESS';
-                 sbtUpdate.successMessage = "SBT SUCCESS — consider extubation";
+                 sbtUpdate.successMessage = "SBT SUCCESS â€” consider extubation";
                  
                  const diagStr = ((pt.primaryDiagnosis || '') + ' ' + (pt.fullData.historyAnswers?.["Past medical history"] || '')).toLowerCase();
                  let rFactors = [];
@@ -707,18 +718,18 @@ io.on("connection", (socket) => {
          pt.fullData.vitalHistory.push({ abg, spo2, hr, rr, timestamp: Date.now() });
          if (pt.fullData.vitalHistory.length > 5) pt.fullData.vitalHistory.shift();
          
-         // ─── PREDICTIVE DETERIORATION ENGINE ─────────────────────────────────
+         // â”€â”€â”€ PREDICTIVE DETERIORATION ENGINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
          // Trend-based scoring across last 3-5 readings of SpO2, RR, HR, PaCO2, pH
-         // Scoring: each abnormal trend +1 | ABG combined worsening (PaCO2↑+pH↓) +2
-         // Risk:    0-1 → LOW | 2-3 → MODERATE | ≥4 → HIGH
+         // Scoring: each abnormal trend +1 | ABG combined worsening (PaCO2â†‘+pHâ†“) +2
+         // Risk:    0-1 â†’ LOW | 2-3 â†’ MODERATE | â‰¥4 â†’ HIGH
          
          let riskScore = 0;
          let trendSummary = [];
          let recommendation = "Continue current monitoring";
 
          // Per-vital trend arrows for UI rendering
-         // "↑" = worsening direction, "↓" = improving direction, "→" = stable
-         const trends = { SpO2: '→', RR: '→', HR: '→', PaCO2: '→', pH: '→' };
+         // "â†‘" = worsening direction, "â†“" = improving direction, "â†’" = stable
+         const trends = { SpO2: 'â†’', RR: 'â†’', HR: 'â†’', PaCO2: 'â†’', pH: 'â†’' };
          
          const history = pt.fullData.vitalHistory;
          const n = history.length;
@@ -730,55 +741,55 @@ io.on("connection", (socket) => {
                  return isNaN(v) ? null : v;
              }).filter(v => v !== null);
 
-             // ── SpO2: falling trend = worsening
+             // â”€â”€ SpO2: falling trend = worsening
              const spo2Vals = vals('spo2');
              if (spo2Vals.length >= 2) {
                  const first = spo2Vals[0];
                  const last  = spo2Vals[spo2Vals.length - 1];
                  if (last < first) {
-                     trends.SpO2 = '↓'; // falling SpO2 = worsening
+                     trends.SpO2 = 'â†“'; // falling SpO2 = worsening
                      if (last <= 94) {
                          riskScore += 1;
-                         trendSummary.push(`SpO2 falling: ${first}% → ${last}% (worsening oxygenation)`);
+                         trendSummary.push(`SpO2 falling: ${first}% â†’ ${last}% (worsening oxygenation)`);
                      }
                  } else if (last > first) {
-                     trends.SpO2 = '↑'; // rising SpO2 = improving
+                     trends.SpO2 = 'â†‘'; // rising SpO2 = improving
                  }
              }
 
-             // ── RR: rising trend = worsening (respiratory distress)
+             // â”€â”€ RR: rising trend = worsening (respiratory distress)
              const rrVals = vals('rr');
              if (rrVals.length >= 2) {
                  const first = rrVals[0];
                  const last  = rrVals[rrVals.length - 1];
                  if (last > first) {
-                     trends.RR = '↑'; // rising RR = worsening
+                     trends.RR = 'â†‘'; // rising RR = worsening
                      if (last >= 20) {
                          riskScore += 1;
-                         trendSummary.push(`RR rising: ${first} → ${last} /min (respiratory distress)`);
+                         trendSummary.push(`RR rising: ${first} â†’ ${last} /min (respiratory distress)`);
                      }
                  } else if (last < first) {
-                     trends.RR = '↓'; // falling RR = improving
+                     trends.RR = 'â†“'; // falling RR = improving
                  }
              }
 
-             // ── HR: rising trend = worsening
+             // â”€â”€ HR: rising trend = worsening
              const hrVals = vals('hr');
              if (hrVals.length >= 2) {
                  const first = hrVals[0];
                  const last  = hrVals[hrVals.length - 1];
                  if (last > first) {
-                     trends.HR = '↑'; // rising HR = worsening
+                     trends.HR = 'â†‘'; // rising HR = worsening
                      if (last >= 100) {
                          riskScore += 1;
-                         trendSummary.push(`HR rising: ${first} → ${last} bpm (tachycardia progression)`);
+                         trendSummary.push(`HR rising: ${first} â†’ ${last} bpm (tachycardia progression)`);
                      }
                  } else if (last < first) {
-                     trends.HR = '↓'; // falling HR = improving
+                     trends.HR = 'â†“'; // falling HR = improving
                  }
              }
 
-             // ── ABG: PaCO2↑ + pH↓ together = ventilation failure (+2)
+             // â”€â”€ ABG: PaCO2â†‘ + pHâ†“ together = ventilation failure (+2)
              const pco2Vals = vals('abg', 'pco2');
              const phVals   = vals('abg', 'ph');
              
@@ -787,33 +798,33 @@ io.on("connection", (socket) => {
                  const first = pco2Vals[0];
                  const last  = pco2Vals[pco2Vals.length - 1];
                  if (last > first) {
-                     trends.PaCO2 = '↑'; // rising PaCO2 = worsening
+                     trends.PaCO2 = 'â†‘'; // rising PaCO2 = worsening
                      abgWorseningScore += 1;
                  } else if (last < first) {
-                     trends.PaCO2 = '↓'; // falling PaCO2 = improving
+                     trends.PaCO2 = 'â†“'; // falling PaCO2 = improving
                  }
              }
              if (phVals.length >= 2) {
                  const first = phVals[0];
                  const last  = phVals[phVals.length - 1];
                  if (last < first) {
-                     trends.pH = '↓'; // falling pH = worsening
+                     trends.pH = 'â†“'; // falling pH = worsening
                      abgWorseningScore += 1;
                  } else if (last > first) {
-                     trends.pH = '↑'; // rising pH = improving
+                     trends.pH = 'â†‘'; // rising pH = improving
                  }
              }
              // Combined ABG deterioration = +2 (ventilation failure pattern)
              if (abgWorseningScore === 2) {
                  riskScore += 2;
-                 trendSummary.push(`ABG deteriorating: PaCO2↑ + pH↓ → ventilation failure pattern`);
+                 trendSummary.push(`ABG deteriorating: PaCO2â†‘ + pHâ†“ â†’ ventilation failure pattern`);
              } else if (abgWorseningScore === 1) {
                  riskScore += 1;
-                 trendSummary.push(`ABG partial worsening: ${trends.PaCO2 === '↑' ? 'PaCO2 rising' : 'pH falling'}`);
+                 trendSummary.push(`ABG partial worsening: ${trends.PaCO2 === 'â†‘' ? 'PaCO2 rising' : 'pH falling'}`);
              }
          }
          
-         // ── Extubation risk modifier
+         // â”€â”€ Extubation risk modifier
          const extRiskLvl = pt.fullData.ventilatorStatus?.sbt?.extubationRisk?.level;
          if (extRiskLvl === 'HIGH') {
              riskScore += 1;
@@ -823,11 +834,11 @@ io.on("connection", (socket) => {
              riskScore += 1;
          }
 
-         // ── Final Risk Classification: 0-1=LOW | 2-3=MODERATE | ≥4=HIGH
+         // â”€â”€ Final Risk Classification: 0-1=LOW | 2-3=MODERATE | â‰¥4=HIGH
          let predictedRisk = "LOW";
          if (riskScore >= 4) {
              predictedRisk = "HIGH";
-             recommendation = "⚠️ High risk of deterioration — intervene early";
+             recommendation = "âš ï¸ High risk of deterioration â€” intervene early";
              io.emit('predictive_alert', {
                  caseId, patientName: pt.patientName,
                  msg: recommendation, score: riskScore, trends
@@ -835,11 +846,11 @@ io.on("connection", (socket) => {
              logger.warn(`PREDICTIVE ALERT [HIGH] for ${caseId} | Score: ${riskScore} | Trends: ${JSON.stringify(trends)}`);
          } else if (riskScore >= 2) {
              predictedRisk = "MODERATE";
-             recommendation = "Moderate risk — increase monitoring frequency";
+             recommendation = "Moderate risk â€” increase monitoring frequency";
          }
 
-         // ─── CLINICAL ACTION PRIORITY ENGINE ────────────────────────────────
-         // Converts prediction → actionable bedside decision
+         // â”€â”€â”€ CLINICAL ACTION PRIORITY ENGINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+         // Converts prediction â†’ actionable bedside decision
          // Input:  predictiveRisk, riskScore, trends, currentVitals, diagnosis
          // Output: priorityLevel, probableFailureType, recommendedActions, timeToAct
          
@@ -859,115 +870,115 @@ io.on("connection", (socket) => {
              let timeToAct             = '> 60 min';
              let failureScore          = { hypoxia: 0, ventilation: 0, shock: 0 };
 
-             // ── Pattern 1: Hypoxia (SpO2↓ AND RR↑)
-             if (trends.SpO2 === '↓' && trends.RR === '↑') {
+             // â”€â”€ Pattern 1: Hypoxia (SpO2â†“ AND RRâ†‘)
+             if (trends.SpO2 === 'â†“' && trends.RR === 'â†‘') {
                  failureScore.hypoxia += 2;
              }
              if (currentSpo2 > 0 && currentSpo2 < 90)  failureScore.hypoxia += 2;
              if (currentSpo2 > 0 && currentSpo2 < 94)  failureScore.hypoxia += 1;
-             if (trends.SpO2 === '↓')                   failureScore.hypoxia += 1;
+             if (trends.SpO2 === 'â†“')                   failureScore.hypoxia += 1;
 
-             // ── Pattern 2: Ventilation Failure (PaCO2↑ + pH↓)
-             if (trends.PaCO2 === '↑' && trends.pH === '↓') {
+             // â”€â”€ Pattern 2: Ventilation Failure (PaCO2â†‘ + pHâ†“)
+             if (trends.PaCO2 === 'â†‘' && trends.pH === 'â†“') {
                  failureScore.ventilation += 3;
              }
              if (currentPco2 > 50)  failureScore.ventilation += 2;
              if (currentPh  > 0 && currentPh < 7.3 )  failureScore.ventilation += 2;
 
-             // ── Pattern 3: Shock (HR↑ + BP↓ or low absolute BP)
-             if (trends.HR === '↑') failureScore.shock += 1;
+             // â”€â”€ Pattern 3: Shock (HRâ†‘ + BPâ†“ or low absolute BP)
+             if (trends.HR === 'â†‘') failureScore.shock += 1;
              if (currentHr > 110)   failureScore.shock += 1;
              if (currentSbp !== null && currentSbp < 90) failureScore.shock += 3;
 
-             // ── Determine Dominant Failure Pattern
+             // â”€â”€ Determine Dominant Failure Pattern
              const maxScore = Math.max(failureScore.hypoxia, failureScore.ventilation, failureScore.shock);
 
              if (maxScore === 0 || predictedRisk === 'LOW') {
-                 // No dominant pattern → routine care
+                 // No dominant pattern â†’ routine care
                  priorityLevel       = 'ROUTINE';
                  probableFailureType = 'No dominant failure pattern';
                  recommendedActions  = ['Continue standard monitoring', 'Reassess vitals per protocol'];
                  timeToAct           = '> 60 min';
 
              } else if (failureScore.hypoxia >= failureScore.ventilation && failureScore.hypoxia >= failureScore.shock) {
-                 // ── HYPOXIA PATTERN ──
+                 // â”€â”€ HYPOXIA PATTERN â”€â”€
                  probableFailureType = 'Hypoxia / Oxygenation Failure';
                  if (currentSpo2 < 88 || predictedRisk === 'HIGH') {
                      priorityLevel     = 'IMMEDIATE';
-                     timeToAct         = '0–10 min';
+                     timeToAct         = '0â€“10 min';
                      recommendedActions = [
-                         '🔴 Escalate oxygen — switch to High-Flow Nasal Cannula (HFNC) or NRB mask',
-                         '🔴 Reposition patient (Head-up 30°)',
-                         '🔴 Call respiratory therapy / anaesthesia NOW',
-                         '🟡 Reassess for secretion retention — suction if intubated',
-                         '🟡 Check FiO2 and PEEP settings — consider PEEP increase',
-                         '⚪ Arterial Blood Gas within 15 minutes of oxygen escalation'
+                         'ðŸ”´ Escalate oxygen â€” switch to High-Flow Nasal Cannula (HFNC) or NRB mask',
+                         'ðŸ”´ Reposition patient (Head-up 30Â°)',
+                         'ðŸ”´ Call respiratory therapy / anaesthesia NOW',
+                         'ðŸŸ¡ Reassess for secretion retention â€” suction if intubated',
+                         'ðŸŸ¡ Check FiO2 and PEEP settings â€” consider PEEP increase',
+                         'âšª Arterial Blood Gas within 15 minutes of oxygen escalation'
                      ];
                  } else {
                      priorityLevel     = 'URGENT';
                      timeToAct         = '30 min';
                      recommendedActions = [
-                         '🟡 Increase supplemental oxygen flow',
-                         '🟡 Check SpO2 probe placement and perfusion',
-                         '🟡 Reassess in 15 minutes; escalate if SpO2 < 92%',
-                         '⚪ Review recent chest X-ray and auscultate breath sounds'
+                         'ðŸŸ¡ Increase supplemental oxygen flow',
+                         'ðŸŸ¡ Check SpO2 probe placement and perfusion',
+                         'ðŸŸ¡ Reassess in 15 minutes; escalate if SpO2 < 92%',
+                         'âšª Review recent chest X-ray and auscultate breath sounds'
                      ];
                  }
 
              } else if (failureScore.ventilation >= failureScore.shock) {
-                 // ── VENTILATION FAILURE PATTERN ──
+                 // â”€â”€ VENTILATION FAILURE PATTERN â”€â”€
                  probableFailureType = 'Ventilation Failure / Hypercapnia';
                  if (predictedRisk === 'HIGH' || currentPco2 > 55 || currentPh < 7.25) {
                      priorityLevel     = 'IMMEDIATE';
-                     timeToAct         = '0–10 min';
+                     timeToAct         = '0â€“10 min';
                      recommendedActions = [
-                         '🔴 Increase ventilator Respiratory Rate immediately',
-                         '🔴 Consider switching to Pressure Control mode to offload respiratory muscles',
-                         '🔴 Notify intensivist / attending physician STAT',
-                         '🟡 Increase tidal volume cautiously (maintain Pplat < 30 cmH2O)',
-                         '🟡 Check for ETT obstruction, secretions, or circuit leak',
-                         '⚪ Repeat ABG in 20 minutes to assess response'
+                         'ðŸ”´ Increase ventilator Respiratory Rate immediately',
+                         'ðŸ”´ Consider switching to Pressure Control mode to offload respiratory muscles',
+                         'ðŸ”´ Notify intensivist / attending physician STAT',
+                         'ðŸŸ¡ Increase tidal volume cautiously (maintain Pplat < 30 cmH2O)',
+                         'ðŸŸ¡ Check for ETT obstruction, secretions, or circuit leak',
+                         'âšª Repeat ABG in 20 minutes to assess response'
                      ];
                  } else {
                      priorityLevel     = 'URGENT';
                      timeToAct         = '30 min';
                      recommendedActions = [
-                         '🟡 Increase RR by 2–4 breaths/minute on ventilator',
-                         '🟡 Monitor capnography if available',
-                         '🟡 Reassess ABG in 30 minutes',
-                         '⚪ Assess patient-ventilator synchrony'
+                         'ðŸŸ¡ Increase RR by 2â€“4 breaths/minute on ventilator',
+                         'ðŸŸ¡ Monitor capnography if available',
+                         'ðŸŸ¡ Reassess ABG in 30 minutes',
+                         'âšª Assess patient-ventilator synchrony'
                      ];
                  }
 
              } else {
-                 // ── SHOCK / HEMODYNAMIC INSTABILITY PATTERN ──
+                 // â”€â”€ SHOCK / HEMODYNAMIC INSTABILITY PATTERN â”€â”€
                  probableFailureType = 'Hemodynamic Instability / Shock';
                  if (predictedRisk === 'HIGH' || (currentSbp !== null && currentSbp < 80)) {
                      priorityLevel     = 'IMMEDIATE';
-                     timeToAct         = '0–10 min';
+                     timeToAct         = '0â€“10 min';
                      recommendedActions = [
-                         '🔴 Administer IV fluid bolus (Normal Saline 250–500 mL over 15 min)',
-                         '🔴 Consider vasopressors (Norepinephrine — check contraindications)',
-                         '🔴 Obtain IV access x2, send urgent labs (lactate, CBC, BMP)',
-                         '🔴 Call intensivist STAT',
-                         '🟡 12-lead ECG to rule out obstructive cause (STEMI / tamponade)',
-                         '⚪ Bladder catheter for hourly urine output monitoring'
+                         'ðŸ”´ Administer IV fluid bolus (Normal Saline 250â€“500 mL over 15 min)',
+                         'ðŸ”´ Consider vasopressors (Norepinephrine â€” check contraindications)',
+                         'ðŸ”´ Obtain IV access x2, send urgent labs (lactate, CBC, BMP)',
+                         'ðŸ”´ Call intensivist STAT',
+                         'ðŸŸ¡ 12-lead ECG to rule out obstructive cause (STEMI / tamponade)',
+                         'âšª Bladder catheter for hourly urine output monitoring'
                      ];
                  } else {
                      priorityLevel     = 'URGENT';
                      timeToAct         = '30 min';
                      recommendedActions = [
-                         '🟡 Administer cautious fluid challenge and reassess BP',
-                         '🟡 Review medication list for hypotensive agents',
-                         '🟡 Check 12-lead ECG',
-                         '⚪ Reassess MAP in 15 minutes; escalate if MAP < 65 mmHg'
+                         'ðŸŸ¡ Administer cautious fluid challenge and reassess BP',
+                         'ðŸŸ¡ Review medication list for hypotensive agents',
+                         'ðŸŸ¡ Check 12-lead ECG',
+                         'âšª Reassess MAP in 15 minutes; escalate if MAP < 65 mmHg'
                      ];
                  }
              }
 
              actionPriority = { priorityLevel, probableFailureType, recommendedActions, timeToAct };
 
-             // ── Emit clinical priority alert for IMMEDIATE/URGENT cases
+             // â”€â”€ Emit clinical priority alert for IMMEDIATE/URGENT cases
              if (predictedRisk !== 'LOW' && (priorityLevel === 'IMMEDIATE' || priorityLevel === 'URGENT')) {
                  io.emit('clinical_priority_alert', {
                      caseId, patientName: pt.patientName,
@@ -977,15 +988,15 @@ io.on("connection", (socket) => {
                  logger.warn(`CLINICAL PRIORITY [${priorityLevel}] for ${caseId} | Failure: ${probableFailureType} | Act in: ${timeToAct}`);
              }
          }
-         // ─── END CLINICAL ACTION PRIORITY ENGINE ────────────────────────────
+         // â”€â”€â”€ END CLINICAL ACTION PRIORITY ENGINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
          const predictiveIntel = {
              predictedRisk, riskScore, trends, trendSummary, recommendation, actionPriority
          };
 
-         // ─── CLINICAL PATHWAY ENGINE ──────────────────────────────────────────
-         // Evidence-based pathway guide: maps diagnosis → checklist, time targets, warnings
-         // SAFETY: Decision support ONLY — no auto-execution
+         // â”€â”€â”€ CLINICAL PATHWAY ENGINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+         // Evidence-based pathway guide: maps diagnosis â†’ checklist, time targets, warnings
+         // SAFETY: Decision support ONLY â€” no auto-execution
          try {
              const pathway = runClinicalPathwayEngine({
                  diagnosis: pt.primaryDiagnosis || pt.diagnosis,
@@ -1008,7 +1019,7 @@ io.on("connection", (socket) => {
          } catch (e) {
              logger.warn(`Pathway engine error for ${caseId}: ${e.message}`);
          }
-         // ─── END CLINICAL PATHWAY ENGINE ──────────────────────────────────────
+         // â”€â”€â”€ END CLINICAL PATHWAY ENGINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
          pt.fullData.ventilatorStatus = {
             state: "SUGGESTED",
@@ -1093,7 +1104,7 @@ app.set("dispatchAlert", (targetRooms, alertPayload) => {
             activeAlerts.set(alertPayload.caseId, currentAlert);
             persistAlert(currentAlert);
             io.to('CONSULTANT').emit('critical_alert', currentAlert);
-            logger.warn(`🚨 ALERT ${alertPayload.caseId} ESCALATED (Level ${escLevel})`);
+            logger.warn(`ðŸš¨ ALERT ${alertPayload.caseId} ESCALATED (Level ${escLevel})`);
             incrementMetric('escalations');
             persistAudit(alertPayload.caseId, 'ESCALATION', { escLevel });
             escLevel++;
@@ -1179,7 +1190,7 @@ setInterval(() => {
                       io.emit('critical_alert', {
                          caseId: 'SYSTEM',
                          patientName: 'ICU Analytics Engine',
-                         alertType: `⚠️ SYSTEM BOTTLENECK DETECTED`,
+                         alertType: `âš ï¸ SYSTEM BOTTLENECK DETECTED`,
                          severity: 'Critical',
                          timestamp: new Date().toLocaleTimeString(),
                          fullData: { 
@@ -1216,7 +1227,7 @@ const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, 
   max: 30, 
-  message: { error: "Too many requests — please retry" }
+  message: { error: "Too many requests â€” please retry" }
 });
 app.use('/api', limiter);
 app.use('/api', clinicalRoutes);
@@ -1251,11 +1262,11 @@ app.post('/api/clinical/interpret-report', async (req, res) => {
    }
 });
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/clinical-opd")
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+  .catch(err => console.error("MongoDB connection error (proceeding in safe mode):", err.message));
 
-// 🔥 REGISTER MODELS
+// ðŸ”¥ REGISTER MODELS
 require("./models/Patient");
 require("./models/Facility");
 require("./models/Visit");
@@ -1300,7 +1311,7 @@ app.post('/api/clinical/notes', requireAuth, async (req, res) => {
       else { io.emit('note_added', { caseId, entry }); }
 
       if (entry.isCritical) {
-         io.emit('critical_note_alert', { caseId, entry, message: `🚨 CRITICAL NOTE by ${user.name}: Potential Deterioration` });
+         io.emit('critical_note_alert', { caseId, entry, message: `ðŸš¨ CRITICAL NOTE by ${user.name}: Potential Deterioration` });
       }
       res.json(entry);
    } catch (e) {
