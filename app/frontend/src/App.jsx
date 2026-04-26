@@ -9,7 +9,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import VerifyPage from './pages/VerifyPage';
 import BillingDashboard from './pages/BillingDashboard';
 
-const API_BASE = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.hostname}:5000` : "http://localhost:5000");
+import { API_BASE_URL } from './config';
+
+const API_BASE = API_BASE_URL;
 
 const socket = io(API_BASE, {
     autoConnect: false

@@ -1,4 +1,4 @@
-function admissionDecision(visit) {
+﻿function admissionDecision(visit) {
   const { vitals = {}, labs = {}, severityLevel } = visit;
 
   const reasons = [];
@@ -38,3 +38,5 @@ function admissionDecision(visit) {
 
 module.exports = admissionDecision;
   
+
+

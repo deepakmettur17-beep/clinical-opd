@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 const Visit = require("../models/Visit");
 
 /**
@@ -42,11 +42,11 @@ const analyzeTrends = async (patientId) => {
     const previous = arr[1].val;
     
     if (lowerIsBetter) {
-      if (current > previous + 0.2) return "Worsening ⚠️";
-      if (current < previous - 0.2) return "Improving ✅";
+      if (current > previous + 0.2) return "Worsening âš ï¸";
+      if (current < previous - 0.2) return "Improving âœ…";
     } else {
-      if (current < previous - 1) return "Worsening ⚠️";
-      if (current > previous + 1) return "Improving ✅";
+      if (current < previous - 1) return "Worsening âš ï¸";
+      if (current > previous + 1) return "Improving âœ…";
     }
     return "Stable";
   };

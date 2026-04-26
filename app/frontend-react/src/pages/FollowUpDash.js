@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchPatients, getFollowUpAnalysis, createVisit, getPharmacyStock } from "../services/API";
 
@@ -120,15 +120,15 @@ Advised follow-up in 2 weeks.`;
             <div className="trend-container">
               <div className="trend-item">
                 <label>HbA1c Trend</label>
-                <div className="trend-values">{analysis?.trends.history.hba1c.map(h => h.val).join(" → ")}</div>
-                <span className={`badge ${analysis?.trends.summary.hba1cStatus.includes('⚠️') ? 'danger' : 'success'}`}>
+                <div className="trend-values">{analysis?.trends.history.hba1c.map(h => h.val).join(" â†’ ")}</div>
+                <span className={`badge ${analysis?.trends.summary.hba1cStatus.includes('âš ï¸') ? 'danger' : 'success'}`}>
                   {analysis?.trends.summary.hba1cStatus}
                 </span>
               </div>
               <div className="trend-item">
                 <label>BP (SBP) Trend</label>
-                <div className="trend-values">{analysis?.trends.history.sbp.map(s => s.val).join(" → ")}</div>
-                <span className={`badge ${analysis?.trends.summary.bpStatus.includes('⚠️') ? 'danger' : 'success'}`}>
+                <div className="trend-values">{analysis?.trends.history.sbp.map(s => s.val).join(" â†’ ")}</div>
+                <span className={`badge ${analysis?.trends.summary.bpStatus.includes('âš ï¸') ? 'danger' : 'success'}`}>
                   {analysis?.trends.summary.bpStatus}
                 </span>
               </div>
@@ -140,7 +140,7 @@ Advised follow-up in 2 weeks.`;
             {analysis?.suggestions.length > 0 ? (
                 analysis.suggestions.map((s, i) => (
                     <div key={i} className="suggestion-pill">
-                        <strong>{s.condition}</strong>: {s.reason} ➡️ <span className="highlight">{s.action}</span>
+                        <strong>{s.condition}</strong>: {s.reason} âž¡ï¸ <span className="highlight">{s.action}</span>
                     </div>
                 ))
             ) : (
@@ -162,7 +162,7 @@ Advised follow-up in 2 weeks.`;
                   <div key={i} className={`med-row ${m.action.toLowerCase()}`}>
                     <div className="med-meta">
                       <strong>{m.name}</strong>
-                      <span>{m.dose} — {m.frequency}</span>
+                      <span>{m.dose} â€” {m.frequency}</span>
                       <div className={`stock-badge ${currentStock > 0 ? 'in-stock' : 'out-of-stock'}`}>
                         {currentStock > 0 ? `${currentStock} in stock` : 'OUT OF STOCK'}
                       </div>
@@ -216,7 +216,7 @@ Advised follow-up in 2 weeks.`;
       {/* COMPLIANCE ALERT */}
       {patient?.complianceMeta?.missedVisits > 0 && (
          <div className="adherence-alert">
-            ⚠️ <strong>Adherence Risk:</strong> Patient missed {patient.complianceMeta.missedVisits} scheduled visits. Verify drug compliance carefully.
+            âš ï¸ <strong>Adherence Risk:</strong> Patient missed {patient.complianceMeta.missedVisits} scheduled visits. Verify drug compliance carefully.
          </div>
       )}
     </div>
@@ -224,3 +224,4 @@ Advised follow-up in 2 weeks.`;
 }
 
 export default FollowUpDash;
+

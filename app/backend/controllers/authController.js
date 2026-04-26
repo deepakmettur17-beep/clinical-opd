@@ -1,4 +1,4 @@
-const User = require("../models/User");
+﻿const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 exports.login = async (req, res) => {
@@ -13,3 +13,6 @@ exports.login = async (req, res) => {
 
   res.json({ token });
 };
+
+
+

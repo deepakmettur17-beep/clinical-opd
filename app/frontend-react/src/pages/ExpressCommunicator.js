@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../config";
 import axios from "axios";
 
-const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+const API_BASE = `${API_BASE_URL}/api`;
 
 function ExpressCommunicator() {
   const [reportText, setReportText] = useState("");
@@ -13,7 +14,7 @@ function ExpressCommunicator() {
     if (!reportText.trim()) return;
     setLoading(true);
     try {
-      const res = await axios.post(`${API_BASE}/quick-explain`, { reportText, patientName });
+      const res = await axios.post(`${API_BASE_URL}/api/quick-explain`, { reportText, patientName });
       setMessage(res.data.message);
     } catch (err) {
       console.error(err);

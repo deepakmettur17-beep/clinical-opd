@@ -1,4 +1,4 @@
-function handleFever(visit, patient, facility) {
+﻿function handleFever(visit, patient, facility) {
   const parseBP = (bpStr) => {
     if (!bpStr) return { sys: 120, dia: 80 };
     const [sys, dia] = bpStr.split('/');
@@ -13,7 +13,7 @@ function handleFever(visit, patient, facility) {
   let confidence = "Low";
   let severity = "Low";
   let treatmentPlan = "Antipyretics and further evaluation";
-  let oneLineSummary = "Fever – check source of infection";
+  let oneLineSummary = "Fever â€“ check source of infection";
   let immediatePlan = ["Obtain full set of vitals"];
   let actionChecklist = [];
   let safetyAlerts = [];
@@ -26,7 +26,7 @@ function handleFever(visit, patient, facility) {
     confidence = "High";
     severity = "Critical";
     treatmentPlan = "Immediate Fluid Resuscitation and Antibiotics";
-    oneLineSummary = "Probable Sepsis – urgent fluids and antibiotics required";
+    oneLineSummary = "Probable Sepsis â€“ urgent fluids and antibiotics required";
     immediatePlan = [
       "Obtain IV access (2 large bore)",
       "Draw blood cultures & lactate",

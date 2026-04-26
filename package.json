@@ -1,0 +1,10 @@
+{
+  "name": "clinical-opd-system",
+  "version": "1.0.0",
+  "description": "Clinical OPD System",
+  "scripts": {
+    "install-all": "cd app/backend && npm install && cd ../frontend-react && npm install",
+    "build-frontend": "cd app/frontend-react && npm run build",
+    "start": "node app/backend/server.js"
+  }
+}

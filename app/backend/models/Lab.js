@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 
 const LabSchema = new mongoose.Schema({
   visit: { type: mongoose.Schema.Types.ObjectId, ref: "Visit", required: true },
@@ -11,3 +11,6 @@ const LabSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 module.exports = mongoose.model("Lab", LabSchema);
+
+
+

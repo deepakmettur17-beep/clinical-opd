@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const router = express.Router();
 const clinicalController = require("../controllers/clinicalController");
 
@@ -7,3 +7,5 @@ router.post("/hospital", clinicalController.evaluateHospitalOS);
 router.get("/clinical/followup/:patientId", clinicalController.getFollowUpAnalysis);
 
 module.exports = router;
+
+

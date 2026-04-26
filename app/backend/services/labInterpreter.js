@@ -1,4 +1,4 @@
-function interpretLabs(labs) {
+﻿function interpretLabs(labs) {
   const labInsights = [];
 
   if (!labs) return labInsights;

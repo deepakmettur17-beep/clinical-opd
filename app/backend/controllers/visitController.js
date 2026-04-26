@@ -1,4 +1,4 @@
-const Visit = require("../models/Visit");
+﻿const Visit = require("../models/Visit");
 
 const getVisits = async (req, res) => {
   try {
@@ -22,3 +22,5 @@ module.exports = {
   getVisits,
   createVisit
 };
+
+

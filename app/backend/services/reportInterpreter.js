@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Clinical Report Interpretation Engine (v8.0 - Communication Grade)
  * Uses high-yield keyword mapping and rule-based template generation.
  */

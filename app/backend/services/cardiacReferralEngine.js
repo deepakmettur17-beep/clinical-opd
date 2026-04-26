@@ -1,6 +1,6 @@
-function generateSTEMIReferral(visit) {
+﻿function generateSTEMIReferral(visit) {
     return `
-  EMERGENCY CARDIAC REFERRAL – PRIMARY PCI
+  EMERGENCY CARDIAC REFERRAL â€“ PRIMARY PCI
   
   Patient: ${visit.patientId?.name || ""} (${visit.patientId?.age}/${visit.patientId?.sex})
   

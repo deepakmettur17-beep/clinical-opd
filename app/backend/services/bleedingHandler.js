@@ -1,4 +1,4 @@
-function handleBleeding(visit, patient, facility) {
+﻿function handleBleeding(visit, patient, facility) {
   const parseBP = (bpStr) => {
     if (!bpStr) return { sys: 120, dia: 80 };
     const [sys, dia] = bpStr.split('/');
@@ -20,7 +20,7 @@ function handleBleeding(visit, patient, facility) {
   let hemodynamicStatus = "Stable";
   let triageLevel = "ORANGE";
   let timeToAction = "Within 1 hour";
-  let oneLineSummary = "Suspected GI bleed – requires evaluation and endoscopy";
+  let oneLineSummary = "Suspected GI bleed â€“ requires evaluation and endoscopy";
   let immediatePlan = ["Apply direct pressure if external bleeding", "Establish IV access", "Check CBC and coagulation profile"];
   let actionChecklist = [];
   let safetyAlerts = [];
@@ -82,7 +82,7 @@ function handleBleeding(visit, patient, facility) {
     hemodynamicStatus = "Unstable";
     triageLevel = "RED";
     timeToAction = "Immediate";
-    oneLineSummary = "Massive GI bleed with shock – immediate resuscitation required";
+    oneLineSummary = "Massive GI bleed with shock â€“ immediate resuscitation required";
     immediatePlan = [
       "Airway protection",
       "2 large-bore IV lines",

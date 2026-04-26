@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const router = express.Router();
 const { generateAISuggestions } = require("../services/aiReasoningEngine");
 
@@ -7,7 +7,7 @@ const { generateAISuggestions } = require("../services/aiReasoningEngine");
 // TEST ROUTE
 // ========================================
 router.get("/test", (req, res) => {
-  res.json({ message: "AI route working properly ✅" });
+  res.json({ message: "AI route working properly âœ…" });
 });
 
 
@@ -30,27 +30,27 @@ router.post("/suggest", async (req, res) => {
     // PRACTICAL DECISION THRESHOLDS
     // ===============================
 
-    // 1️⃣ Severe bacterial marker
+    // 1ï¸âƒ£ Severe bacterial marker
     if (labs.neutrophils > 80 || labs.crp > 50) {
       practicalFlags.push(
-        "High bacterial probability → Continue antibiotics"
+        "High bacterial probability â†’ Continue antibiotics"
       );
     }
 
-    // 2️⃣ Liver injury threshold
+    // 2ï¸âƒ£ Liver injury threshold
     if (
       (labs.ast && labs.ast > 5 * (labs.ast_normal || 40)) ||
       (labs.alt && labs.alt > 5 * (labs.alt_normal || 40))
     ) {
       practicalFlags.push(
-        "AST/ALT >5× normal → Consider admission"
+        "AST/ALT >5Ã— normal â†’ Consider admission"
       );
     }
 
-    // 3️⃣ Rising creatinine
+    // 3ï¸âƒ£ Rising creatinine
     if (labs.creatinine_trend === "rising") {
       practicalFlags.push(
-        "Creatinine rising → IV hydration ± avoid oral acyclovir → consider IV switch"
+        "Creatinine rising â†’ IV hydration Â± avoid oral acyclovir â†’ consider IV switch"
       );
     }
 
@@ -78,4 +78,6 @@ router.post("/suggest", async (req, res) => {
 });
 
 module.exports = router;
+
+
 

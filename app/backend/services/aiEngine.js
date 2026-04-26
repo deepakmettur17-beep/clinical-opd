@@ -1,4 +1,4 @@
-async function generateAIDraft(visit, facility) {
+﻿async function generateAIDraft(visit, facility) {
 
   const flags = [];
   const admissionReasons = [];
@@ -13,13 +13,13 @@ async function generateAIDraft(visit, facility) {
 
   let qsofa = 0;
 
-  // Respiratory rate not yet stored → optional future
-  // Hypotension (SBP ≤100)
+  // Respiratory rate not yet stored â†’ optional future
+  // Hypotension (SBP â‰¤100)
   if (vitals.bp) {
     const [sys] = vitals.bp.split("/").map(Number);
     if (sys && sys <= 100) {
       qsofa++;
-      flags.push("Hypotension (SBP ≤100)");
+      flags.push("Hypotension (SBP â‰¤100)");
       admissionReasons.push("Hypotension");
     }
   }
@@ -117,16 +117,16 @@ if (severity === "Critical") {
   followUpAdvice = "Continuous monitoring in ICU setting.";
 }
 else if (severity === "High") {
-  provisionalDiagnosis = "Severe infection – rule out sepsis";
+  provisionalDiagnosis = "Severe infection â€“ rule out sepsis";
   treatmentPlan = "Admit. Start IV antibiotics, IV fluids, close monitoring.";
   referralSuggestion = "Refer if deterioration or lack of improvement.";
   followUpAdvice = "Frequent reassessment of vitals and labs.";
 }
 else {
-  provisionalDiagnosis = "Infective process – clinical correlation required";
+  provisionalDiagnosis = "Infective process â€“ clinical correlation required";
   treatmentPlan = "Empirical antibiotics, hydration, outpatient monitoring.";
   referralSuggestion = "No immediate referral required.";
-  followUpAdvice = "Review in 24–48 hours.";
+  followUpAdvice = "Review in 24â€“48 hours.";
 }
 
 const draft = {

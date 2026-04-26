@@ -1,4 +1,4 @@
-exports.getSuggestions = async (req, res) => {
+﻿exports.getSuggestions = async (req, res) => {
     const { complaint } = req.body;
   
     if (!complaint) {
@@ -82,3 +82,5 @@ exports.getSuggestions = async (req, res) => {
     res.json(suggestions);
   };
   
+
+

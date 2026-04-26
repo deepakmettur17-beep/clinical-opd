@@ -1,4 +1,4 @@
-function triageEngine(vitals) {
+﻿function triageEngine(vitals) {
     const { pulse, spo2, temperature, bp } = vitals;
   
     let risk = "Low";

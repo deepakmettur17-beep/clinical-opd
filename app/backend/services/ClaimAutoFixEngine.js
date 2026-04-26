@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Claim Auto-Fix Engine (Production Grade v2)
  * ---------------------------------------------------------
  * Converts weak clinical documentation into denial-proof

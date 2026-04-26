@@ -107,17 +107,25 @@ function Visits() {
   };
 
   // ================= AI SUGGEST =================
-  const res = await getAISuggestions(
-    form.complaint,
-    {
-      pulse: form.pulse,
-      spo2: form.spo2,
-      temperature: form.temperature,
-      bp: form.bp
-    },
-    45, // temporary hardcoded age
-    "Male" // temporary
-  );
+  const handleAISuggest = async () => {
+    try {
+      const res = await getAISuggestions(
+        form.complaint,
+        {
+          pulse: form.pulse,
+          spo2: form.spo2,
+          temperature: form.temperature,
+          bp: form.bp
+        },
+        45, // temporary hardcoded age
+        "Male" // temporary
+      );
+      setAiResult(res.data);
+    } catch (err) {
+      console.error("AI Error:", err);
+      alert("AI suggestion failed. Check if clinical engine is active.");
+    }
+  };
   
   // ================= UI =================
   return (
@@ -166,7 +174,7 @@ function Visits() {
     <ul>
       {aiResult.diagnoses.map((d, i) => (
         <li key={i}>
-          <strong>{d.condition}</strong> — {d.probability}
+          <strong>{d.condition}</strong> â€” {d.probability}
         </li>
       ))}
     </ul>
@@ -220,3 +228,4 @@ function Visits() {
 }
 
 export default Visits;
+

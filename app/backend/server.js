@@ -6,7 +6,18 @@ const { createClient } = require('redis');
 const { createAdapter } = require('@socket.io/redis-adapter');
 const { randomUUID } = require('crypto');
 const cors = require('cors');
+const path = require('path');
+const connectDB = require('./db');
 require("dotenv").config();
+
+// Connect to Database
+connectDB();
+
+// Import Routes
+const patientRoutes = require('./routes/patientRoutes');
+const visitRoutes = require('./routes/visitRoutes');
+const aiRoutes = require('./routes/aiRoutes');
+const clinicalRoutes = require('./routes/clinicalRoutes');
 
 process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
@@ -42,6 +53,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Mount Routes
+app.use('/patients', patientRoutes);
+app.use('/visits', visitRoutes);
+app.use('/api/ai', aiRoutes);
+app.use('/api/clinical', clinicalRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, service: 'clinical-opd-backend' });
@@ -1504,6 +1521,18 @@ app.get("/api/clinical/claim/guard/:caseId", async (req, res) => {
 });
 
 
+// --- SERVE FRONTEND ---
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend-react/build')));
+  
+  app.get('*', (req, res) => {
+    // Only serve index.html for non-API routes
+    if (!req.path.startsWith('/api') && !req.path.startsWith('/patients') && !req.path.startsWith('/visits')) {
+      res.sendFile(path.resolve(__dirname, '../frontend-react', 'build', 'index.html'));
+    }
+  });
+}
+
 server.listen(process.env.PORT || 5000, () =>
-  console.log("Server & WebSockets running on port 5000")
+  console.log(`Server & WebSockets running on port ${process.env.PORT || 5000}`)
 );

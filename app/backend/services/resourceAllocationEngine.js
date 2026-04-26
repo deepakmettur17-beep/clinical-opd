@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Resource Allocation Engine (Upgraded)
  * ---------------------------------------------------------
  * Analyzes hospital-wide triage data to prioritize ICU beds
@@ -105,7 +105,7 @@ const runResourceAllocation = (patients = []) => {
             location: loc,
             count: locationStats[loc],
             recommendation: "Shift patients to ICU / call backup",
-            message: `🔥 OVERLOAD: ${locationStats[loc]} Critical cases in ${loc}`
+            message: `ðŸ”¥ OVERLOAD: ${locationStats[loc]} Critical cases in ${loc}`
           });
         }
       }

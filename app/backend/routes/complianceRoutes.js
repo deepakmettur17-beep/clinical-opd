@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const router = express.Router();
 const Visit = require("../models/Visit");
 
@@ -15,7 +15,7 @@ router.get("/pci-monthly-report", async (req, res) => {
         "cardiacEmergency.isSTEMI": true
       });
   
-      // 👇 PASTE NEW KPI SPLIT BLOCK HERE
+      // ðŸ‘‡ PASTE NEW KPI SPLIT BLOCK HERE
   
       // Local PCI (Cath lab present)
       const localPCI = visits.filter(v =>
@@ -26,7 +26,7 @@ router.get("/pci-monthly-report", async (req, res) => {
       const totalLocalPCI = localPCI.length;
   
       const onTimeLocalPCI = localPCI.filter(v =>
-        v.dtbPerformanceFlag === "On Time (≤90 min)"
+        v.dtbPerformanceFlag === "On Time (â‰¤90 min)"
       ).length;
   
       const localDTBValues = localPCI
@@ -63,7 +63,7 @@ router.get("/pci-monthly-report", async (req, res) => {
         ? Math.round((transferWithin30Min / totalTransfers) * 100)
         : 0;
   
-      // 👇 Then return JSON
+      // ðŸ‘‡ Then return JSON
       res.json({
         period: `${year}-${month}`,
         totalSTEMI: visits.length,
@@ -87,3 +87,4 @@ router.get("/pci-monthly-report", async (req, res) => {
   });
 
 module.exports = router;
+

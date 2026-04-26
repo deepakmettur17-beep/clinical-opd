@@ -22,7 +22,7 @@ const BUCKETS = {
         danger: "sudden leg weakness or loss of bladder control"
     },
     liver: { 
-        action: "Try reducing oily food and walking daily for 20–30 minutes.",
+        action: "Try reducing oily food and walking daily for 20-30 minutes.",
         danger: "yellowing of eyes or severe stomach pain"
     },
     brain: { 

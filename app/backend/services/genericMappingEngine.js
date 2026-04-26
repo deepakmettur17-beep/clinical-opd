@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Generic Mapping Engine
  * Maps Brand Names to Generic Names, Strengths, Classes, and Categories.
  */
@@ -66,7 +66,7 @@ const formatPrescription = (brandName, mode = "FULL") => {
   }
 
   // DEFAULT: FULL MODE
-  return `${brandName} (${details.generic} ${details.strength} – ${details.class})`;
+  return `${brandName} (${details.generic} ${details.strength} â€“ ${details.class})`;
 };
 
 module.exports = { getDrugDetails, formatPrescription };

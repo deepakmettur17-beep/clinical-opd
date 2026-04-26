@@ -1,4 +1,4 @@
-function calculateTransferTime(visit) {
+﻿function calculateTransferTime(visit) {
 
     if (!visit.doorTime || !visit.transferOutTime) return visit;
   

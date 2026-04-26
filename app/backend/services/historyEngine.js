@@ -1,4 +1,4 @@
-function generateHistoryTemplate(chiefComplaint) {
+﻿function generateHistoryTemplate(chiefComplaint) {
   const complaintStr = chiefComplaint ? chiefComplaint.toLowerCase() : "";
 
   // 1. Base HPI Structure

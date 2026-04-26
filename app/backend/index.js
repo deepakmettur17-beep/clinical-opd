@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
@@ -21,4 +21,6 @@ app.use("/visits", visitRoutes);
 app.listen(4000, () => {
   console.log("Backend running on port 4000");
 });
+
+
 

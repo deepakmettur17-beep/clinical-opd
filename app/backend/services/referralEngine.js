@@ -1,4 +1,4 @@
-function generateAMADocumentation(visit) {
+﻿function generateAMADocumentation(visit) {
 
     const reasons = visit.admissionJustification || [];
     const complaint = visit.chiefComplaint || "current illness";

@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const router = express.Router();
 const Visit = require("../models/Visit");
 
@@ -37,7 +37,7 @@ router.get("/cardiology", async (req, res) => {
 
     const onTimePCI = await Visit.countDocuments({
         "cardiacEmergency.isSTEMI": true,
-        dtbPerformanceFlag: "On Time (≤90 min)"
+        dtbPerformanceFlag: "On Time (â‰¤90 min)"
       });
 
       const activeDelays = await Visit.countDocuments({
@@ -70,3 +70,4 @@ router.get("/cardiology", async (req, res) => {
 });
 
 module.exports = router;
+

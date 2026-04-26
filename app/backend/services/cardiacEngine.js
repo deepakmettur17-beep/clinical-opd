@@ -1,4 +1,4 @@
-function evaluateCardiacIntelligence(visit) {
+﻿function evaluateCardiacIntelligence(visit) {
 
     // ================= STEMI RULE ENGINE =================
     const stElevationLeads = visit.ecg?.stElevationLeads || [];
@@ -12,7 +12,7 @@ function evaluateCardiacIntelligence(visit) {
       visit.admissionPlan = "Immediate PCI";
   
       visit.ruleFlags = visit.ruleFlags || [];
-      visit.ruleFlags.push("STEMI – Immediate Reperfusion Required");
+      visit.ruleFlags.push("STEMI â€“ Immediate Reperfusion Required");
     }
   
     // ================= KILLIP CLASSIFICATION =================
@@ -30,7 +30,7 @@ function evaluateCardiacIntelligence(visit) {
       visit.mortalityRiskEstimate = "High (Pulmonary Edema)";
     } else {
       visit.killipClass = 1;
-      visit.mortalityRiskEstimate = "Low–Moderate";
+      visit.mortalityRiskEstimate = "Lowâ€“Moderate";
     }
   
     // ================= DOOR TO BALLOON CALC =================

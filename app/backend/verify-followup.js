@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 const Patient = require("./models/Patient");
 const Visit = require("./models/Visit");
 const { analyzeTrends, getSuggestions } = require("./services/followUpEngine");
@@ -55,9 +55,9 @@ async function verify() {
 
   // 5. Check logic
   if (trends.summary.hba1cStatus.includes("Worsening") && trends.summary.bpStatus.includes("Worsening")) {
-    console.log("✅ TREND ANALYSIS SUCCESSFUL");
+    console.log("âœ… TREND ANALYSIS SUCCESSFUL");
   } else {
-    console.log("❌ TREND ANALYSIS FAILED");
+    console.log("âŒ TREND ANALYSIS FAILED");
   }
 
   // Cleanup
@@ -67,3 +67,5 @@ async function verify() {
 }
 
 verify().catch(console.error);
+
+

@@ -57,7 +57,6 @@ function ReportInterpreter() {
           {interpretation && (
             <div className="interpretation-results">
               
-              {/* 🧠 What doctors see */}
               <div className="card doctor-card border-left-decision">
                 <h3>🧠 Clinical Decision Layer</h3>
                 <div className="flex-row">
@@ -86,7 +85,6 @@ function ReportInterpreter() {
                 </ul>
               </div>
 
-              {/* 👨⚕️ What it means */}
               <div className="card meaning-card">
                 <h3>👨‍⚕️ Clinical Analysis</h3>
                 <div className="analysis-grid">
@@ -101,7 +99,6 @@ function ReportInterpreter() {
                 </div>
               </div>
 
-              {/* ⚠️ Urgency & Prognosis */}
               <div className="card urgency-card highlight">
                 <h3>⚠️ Severity & Prognosis</h3>
                 <p><strong>Outlook:</strong> {interpretation.prognosis}</p>
@@ -112,7 +109,6 @@ function ReportInterpreter() {
                 )}
               </div>
 
-              {/* 👤 For patient */}
               <div className="card patient-card ivory">
                 <h3>👤 For Patient</h3>
                 <p className="simple-text">{interpretation.patientExplanation}</p>
@@ -122,7 +118,6 @@ function ReportInterpreter() {
                 </div>
               </div>
 
-              {/* ➡️ What to do next */}
               <div className="card next-steps-card">
                 <h3>➡️ Next Clinical Steps</h3>
                 <ul>
@@ -130,12 +125,11 @@ function ReportInterpreter() {
                 </ul>
               </div>
 
-              {/* 📅 v4: Follow-Up & Care Plan */}
               <div className="card follow-up-card highlight-green">
                 <h3>📅 Follow-Up & Care Plan</h3>
                 
                 <div className="care-section">
-                    <strong>🗓️ Follow-up Timeline:</strong>
+                    <strong>📅 Follow-up Timeline:</strong>
                     <ul>
                         {interpretation.followUpPlan.map((p, idx) => <li key={idx}>{p}</li>)}
                     </ul>
@@ -156,7 +150,6 @@ function ReportInterpreter() {
                 </div>
               </div>
 
-              {/* 🔔 v5: Care Tracker Panel */}
               <div className="card tracking-card ivory-blue">
                 <h3>🔔 Care Tracker (Closed-Loop)</h3>
                 
@@ -189,7 +182,6 @@ function ReportInterpreter() {
                 </div>
               </div>
 
-              {/* 📊 v6: Compliance Panel */}
               <div className="card compliance-card border-top-red">
                 <h3>📊 Clinical Compliance Intelligence</h3>
                 
@@ -233,7 +225,6 @@ function ReportInterpreter() {
                 </div>
               </div>
 
-              {/* 🏥 v7: Care Ecosystem Panel */}
               <div className="card ecosystem-card border-left-blue">
                 <h3>🏥 Care Ecosystem & Referral</h3>
                 
@@ -278,7 +269,6 @@ function ReportInterpreter() {
                 </div>
               </div>
 
-              {/* 📤 v8: Communication & Messaging */}
               <div className="card communication-card border-top-blue">
                 <h3>📤 Communication & Patient Outbound</h3>
                 
@@ -306,7 +296,7 @@ function ReportInterpreter() {
                 </div>
 
                 <div className="comm-section">
-                    <strong>🧾 Physician OPD Note:</strong>
+                    <strong>🩺 Physician OPD Note:</strong>
                     <div className="doctor-note-box">
                         <p>{interpretation.doctorSummaryNote}</p>
                     </div>
@@ -314,7 +304,7 @@ function ReportInterpreter() {
                         navigator.clipboard.writeText(interpretation.doctorSummaryNote);
                         alert("Doctor Note Copied!");
                     }}>
-                        🧾 Copy Doctor Note
+                        🩺 Copy Doctor Note
                     </button>
                 </div>
               </div>

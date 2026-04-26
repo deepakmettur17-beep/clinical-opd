@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const router = express.Router();
 const Doctor = require("../models/Doctor");
 
@@ -14,3 +14,4 @@ router.post("/", async (req, res) => {
 });
 
 module.exports = router;
+

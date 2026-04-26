@@ -1,4 +1,4 @@
-function scoringEngine(vitals) {
+﻿function scoringEngine(vitals) {
     const { pulse, spo2, temperature, bp } = vitals;
   
     let score = 0;

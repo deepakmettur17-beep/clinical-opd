@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 
 const billingSchema = new mongoose.Schema({
   patientId: { type: mongoose.Schema.Types.ObjectId, ref: "Patient" },
@@ -9,3 +9,6 @@ const billingSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 module.exports = mongoose.model("Billing", billingSchema);
+
+
+

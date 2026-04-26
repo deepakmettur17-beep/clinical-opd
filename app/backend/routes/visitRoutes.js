@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const crypto = require("crypto");
@@ -89,7 +89,7 @@ if (visit.cardiacEmergency?.isSTEMI) {
       visit.criticalCare = true;
       visit.admissionPlan = "Immediate PCI";
       visit.ruleFlags = visit.ruleFlags || [];
-      visit.ruleFlags.push("STEMI Alert – Immediate PCI Required");
+      visit.ruleFlags.push("STEMI Alert â€“ Immediate PCI Required");
       visit.transferLetter = generateSTEMIReferral(visit);
     }
 
@@ -119,7 +119,7 @@ if (visit.cardiacEmergency?.isSTEMI) {
         visit.doorToBalloonMinutes = diffMinutes;
     
         if (diffMinutes <= 90) {
-          visit.dtbPerformanceFlag = "Within guideline (≤90 min)";
+          visit.dtbPerformanceFlag = "Within guideline (â‰¤90 min)";
         } else {
           visit.dtbPerformanceFlag = "Delayed (>90 min)";
         }
@@ -303,3 +303,4 @@ router.post("/verify", async (req, res) => {
 });
 
 module.exports = router;
+

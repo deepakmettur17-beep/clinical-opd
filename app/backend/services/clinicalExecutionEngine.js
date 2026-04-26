@@ -1,23 +1,23 @@
-/**
+﻿/**
  * Closed-Loop Clinical Execution Engine (v2)
  * ---------------------------------------------------------
  * Tracks real-world bedside execution of clinical care steps
  * against protocol SLA targets with audit-accurate timestamps.
  *
- * Storage: Redis  →  key: execution:{caseId}
+ * Storage: Redis  â†’  key: execution:{caseId}
  * Socket alerts:
- *   sla_breach_critical   – MISSED IMMEDIATE step
- *   poor_compliance_alert – complianceScore < 70
+ *   sla_breach_critical   â€“ MISSED IMMEDIATE step
+ *   poor_compliance_alert â€“ complianceScore < 70
  */
 
-// ── SLA windows (milliseconds) ───────────────────────────────────────────
+// â”€â”€ SLA windows (milliseconds) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const SLA_MS = {
   IMMEDIATE:   5  * 60 * 1000,   //  5 min
   URGENT:      30 * 60 * 1000,   // 30 min
   SUPPORTIVE:  60 * 60 * 1000,   // 60 min
 };
 
-// ── Compliance deductions ─────────────────────────────────────────────────
+// â”€â”€ Compliance deductions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DEDUCTIONS = {
   MISSED_IMMEDIATE:   40,
   DELAYED_IMMEDIATE:  20,
@@ -26,7 +26,7 @@ const DEDUCTIONS = {
   MISSED_SUPPORTIVE:  10,
 };
 
-// ── Redis key helper ──────────────────────────────────────────────────────
+// â”€â”€ Redis key helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const redisKey = (caseId) => `execution:${caseId}`;
 
 /**
@@ -44,10 +44,10 @@ function getSlaCategory(category = '') {
 
 /**
  * Compute the status of a single step:
- * - COMPLETED  → done within SLA
- * - DELAYED    → done after SLA
- * - MISSED     → still pending past SLA × 1.5 buffer
- * - PENDING    → assigned, SLA not yet breached
+ * - COMPLETED  â†’ done within SLA
+ * - DELAYED    â†’ done after SLA
+ * - MISSED     â†’ still pending past SLA Ã— 1.5 buffer
+ * - PENDING    â†’ assigned, SLA not yet breached
  */
 function computeStepStatus(step, now = Date.now()) {
   const slaMs  = SLA_MS[step.slaCategory] || SLA_MS.SUPPORTIVE;
@@ -58,7 +58,7 @@ function computeStepStatus(step, now = Date.now()) {
     return timeTaken <= slaMs ? 'COMPLETED' : 'DELAYED';
   }
 
-  // Not completed – check for MISSED
+  // Not completed â€“ check for MISSED
   if (now - base > slaMs * 1.5) return 'MISSED';
   return 'PENDING';
 }
@@ -85,7 +85,7 @@ async function assignStep(caseId, step, redisClient) {
     try {
       await redisClient.rPush(redisKey(caseId), JSON.stringify(record));
     } catch (e) {
-      // Redis write failure – non-fatal, fall back to in-memory
+      // Redis write failure â€“ non-fatal, fall back to in-memory
     }
   }
   return record;
@@ -177,7 +177,7 @@ async function runComplianceAnalysis(caseId, redisClient, inMemoryLogs) {
         complianceScore -= DEDUCTIONS.MISSED_IMMEDIATE;
         criticalAlerts.push({
           type:    'sla_breach_critical',
-          message: `⚠️ IMMEDIATE step missed: "${step.label}"`,
+          message: `âš ï¸ IMMEDIATE step missed: "${step.label}"`,
           step:    step.label,
         });
       } else if (step.slaCategory === 'URGENT') {
@@ -190,7 +190,7 @@ async function runComplianceAnalysis(caseId, redisClient, inMemoryLogs) {
 
   complianceScore = Math.max(0, Math.min(100, Math.round(complianceScore)));
 
-  // Step timeline for UI — one entry per log with audit-accurate timestamps
+  // Step timeline for UI â€” one entry per log with audit-accurate timestamps
   const stepTimeline = logs.map((step, i) => ({
     index:       i,
     label:       step.label,
@@ -211,7 +211,7 @@ async function runComplianceAnalysis(caseId, redisClient, inMemoryLogs) {
     delayedSteps,
     missedSteps,
     complianceScore,
-    // Updated thresholds: >90 = GREEN, 70–90 = YELLOW, <70 = RED
+    // Updated thresholds: >90 = GREEN, 70â€“90 = YELLOW, <70 = RED
     status:          complianceScore > 90 ? 'SUCCESS' : complianceScore >= 70 ? 'WARNING' : 'CRITICAL',
     criticalAlerts,
     poorCompliance:  complianceScore < 70,

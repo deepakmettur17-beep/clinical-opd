@@ -1,4 +1,4 @@
-const Patient = require("../models/Patient");
+﻿const Patient = require("../models/Patient");
 
 const getPatients = async (req, res) => {
   try {
@@ -42,3 +42,5 @@ module.exports = {
   createPatient,
   deletePatient
 };
+
+

@@ -1,4 +1,4 @@
-function evaluateFacilityEscalation(visit, facility) {
+﻿function evaluateFacilityEscalation(visit, facility) {
 
   if (!facility || !facility.capabilities) return;
 

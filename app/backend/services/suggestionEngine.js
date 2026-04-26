@@ -1,4 +1,4 @@
-function generateSuggestions(diagnosis, severity, vitals, labInsights, extras) {
+﻿function generateSuggestions(diagnosis, severity, vitals, labInsights, extras) {
   let suggestions = [];
 
   const diagUpper = diagnosis ? diagnosis.toUpperCase() : "";

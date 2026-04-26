@@ -1,4 +1,4 @@
-function handleSyncope(visit, patient, facility) {
+﻿function handleSyncope(visit, patient, facility) {
   const parseBP = (bpStr) => {
     if (!bpStr) return { sys: 120, dia: 80 };
     const [sys, dia] = bpStr.split('/');
@@ -17,7 +17,7 @@ function handleSyncope(visit, patient, facility) {
     { name: "Cardiac Arrhythmia", priority: "Low" },
     { name: "Orthostatic Hypotension", priority: "Low" }
   ];
-  let oneLineSummary = "Syncope episode – requires evaluation";
+  let oneLineSummary = "Syncope episode â€“ requires evaluation";
   let immediatePlan = ["Place patient in supine position", "Check vitals", "Obtain 12-lead ECG"];
   let actionChecklist = [];
   let safetyAlerts = [];
@@ -43,7 +43,7 @@ function handleSyncope(visit, patient, facility) {
       { name: "Heart Block", priority: "High" }
     ];
     confidence = "Moderate";
-    oneLineSummary = "High-risk syncope – rule out dangerous arrhythmias";
+    oneLineSummary = "High-risk syncope â€“ rule out dangerous arrhythmias";
     immediatePlan = [
       "Immediate 12-lead ECG and continuous telemetry",
       "Establish IV access and draw troponin/BNP",
@@ -64,7 +64,7 @@ function handleSyncope(visit, patient, facility) {
       { name: "Autonomic Neuropathy", priority: "Moderate" }
     ];
     confidence = "Moderate";
-    oneLineSummary = "Orthostatic syncope – evaluate fluid status and medications";
+    oneLineSummary = "Orthostatic syncope â€“ evaluate fluid status and medications";
     immediatePlan = [
       "Check orthostatic vitals",
       "Consider IV fluids if volume depleted",
@@ -75,7 +75,7 @@ function handleSyncope(visit, patient, facility) {
       { step: 1, action: "Orthostatic BP Measurement", urgency: "Normal" },
       { step: 2, action: "Medication Reconciliation", urgency: "Normal" }
     ];
-    safetyAlerts = ["Fall risk – assist patient when mobilized."];
+    safetyAlerts = ["Fall risk â€“ assist patient when mobilized."];
   } else {
     type = isVasovagal ? "Vasovagal" : "Undifferentiated";
     diagnosis = isVasovagal ? "Vasovagal Syncope" : "Syncope (Undifferentiated)";
@@ -85,7 +85,7 @@ function handleSyncope(visit, patient, facility) {
       { name: "Cardiac Arrhythmia", priority: "Low" }
     ];
     confidence = isVasovagal ? "High" : "Low";
-    oneLineSummary = isVasovagal ? "Vasovagal syncope – reassure and monitor" : "Undifferentiated syncope – complete basic workup";
+    oneLineSummary = isVasovagal ? "Vasovagal syncope â€“ reassure and monitor" : "Undifferentiated syncope â€“ complete basic workup";
     immediatePlan = [
       "Reassure patient and keep supine",
       "Oral hydration if tolerated",
@@ -149,9 +149,9 @@ function handleSyncope(visit, patient, facility) {
 
   // Update oneLineSummary
   if (riskLevel === "High") {
-    oneLineSummary = "High-risk syncope – requires admission and cardiac evaluation";
+    oneLineSummary = "High-risk syncope â€“ requires admission and cardiac evaluation";
   } else if (riskLevel === "Low") {
-    oneLineSummary = "Likely benign syncope – safe for discharge with advice";
+    oneLineSummary = "Likely benign syncope â€“ safe for discharge with advice";
   }
 
   if (sysBP < 90) {

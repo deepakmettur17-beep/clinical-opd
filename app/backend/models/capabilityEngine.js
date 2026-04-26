@@ -1,4 +1,4 @@
-function evaluateFacilityEscalation(visit, facility) {
+﻿function evaluateFacilityEscalation(visit, facility) {
 
   if (!facility || !facility.capabilities) return visit;
 
@@ -27,3 +27,5 @@ function evaluateFacilityEscalation(visit, facility) {
 }
 
 module.exports = { evaluateFacilityEscalation };
+
+

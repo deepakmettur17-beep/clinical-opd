@@ -1,4 +1,4 @@
-function handleBreathlessness(visit, patient, facility) {
+﻿function handleBreathlessness(visit, patient, facility) {
   const spo2 = visit.vitals?.spo2 || 98;
 
   let diagnosis = "Respiratory Distress - Undifferentiated";
@@ -6,7 +6,7 @@ function handleBreathlessness(visit, patient, facility) {
   let confidence = "Low";
   let severity = "Moderate";
   let treatmentPlan = "Oxygen Therapy as needed";
-  let oneLineSummary = "Breathlessness – assess oxygen saturation";
+  let oneLineSummary = "Breathlessness â€“ assess oxygen saturation";
   let immediatePlan = ["Assess airway and breathing", "Check SpO2"];
   let actionChecklist = [];
   let safetyAlerts = [];
@@ -19,7 +19,7 @@ function handleBreathlessness(visit, patient, facility) {
     confidence = "Moderate";
     severity = "Critical";
     treatmentPlan = "Oxygen & Diuresis";
-    oneLineSummary = "Acute Hypoxia/Heart Failure – immediate oxygenation required";
+    oneLineSummary = "Acute Hypoxia/Heart Failure â€“ immediate oxygenation required";
     immediatePlan = [
       "Sit patient upright",
       "Provide supplemental O2 / NIV if needed",

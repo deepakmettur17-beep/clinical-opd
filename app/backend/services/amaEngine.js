@@ -1,4 +1,4 @@
-function generateAMADocumentation(visit) {
+﻿function generateAMADocumentation(visit) {
     return `
   The patient was advised referral to ${visit.referral.specialty} 
   due to: ${visit.referral.reason}.
@@ -17,3 +17,5 @@ function generateAMADocumentation(visit) {
   }
   
   module.exports = generateAMADocumentation;
+
+

@@ -1,4 +1,4 @@
-function labDecisionEngine(labs) {
+﻿function labDecisionEngine(labs) {
     let alerts = [];
     let recommendations = [];
     let admissionFlag = false;
@@ -12,13 +12,13 @@ function labDecisionEngine(labs) {
     // CRP threshold
     if (labs.crp && labs.crp > 50) {
       alerts.push("CRP > 50 mg/L");
-      recommendations.push("Likely active bacterial infection — continue IV antibiotics");
+      recommendations.push("Likely active bacterial infection â€” continue IV antibiotics");
     }
   
     // Liver enzymes
     if (labs.ast && labs.alt) {
       if (labs.ast > 5 * labs.astUpperLimit || labs.alt > 5 * labs.altUpperLimit) {
-        alerts.push("Severe transaminitis (>5× ULN)");
+        alerts.push("Severe transaminitis (>5Ã— ULN)");
         recommendations.push("Consider hospital admission");
         admissionFlag = true;
       }
@@ -41,3 +41,5 @@ function labDecisionEngine(labs) {
   
   module.exports = labDecisionEngine;
   
+
+

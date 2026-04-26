@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const pharmacyService = require('./pharmacyService');
 const drugMasterService = require('./drugMasterService');
 
@@ -241,10 +241,10 @@ function deriveMedications(patientData, formulary) {
       if (fallback && isAvailable(fallback, category) && !cachedIsAllergic(fallback, allergies)) {
         logTrace("Allergy Check", `Allergy to ${preferred}. Substituting with ${fallback}.`);
         preferred = fallback;
-        addAlert(`Modified due to documented allergy — ${fallback} substituted for original first-line agent`);
+        addAlert(`Modified due to documented allergy â€” ${fallback} substituted for original first-line agent`);
       } else {
         addContra(`Standard therapy withheld: ${preferred} due to ALLERGY (No safe substitute)`);
-        logTrace("Allergy Check", `Blocked ${preferred} — no safe substitute available.`);
+        logTrace("Allergy Check", `Blocked ${preferred} â€” no safe substitute available.`);
         return;
       }
     }
@@ -384,7 +384,7 @@ function deriveMedications(patientData, formulary) {
       auditStatus = auditEngine(treatments, diagUpper, medicationAlerts, contraindicationsTriggered, allergies, decisionTrace);
     } catch (err2) {
       logTrace("Redundancy Engine", `Audit Engine crashed on retry. Triggering Global Safe Mode.`);
-      return { error: "SYSTEM IN SAFE MODE — MANUAL REVIEW REQUIRED" };
+      return { error: "SYSTEM IN SAFE MODE â€” MANUAL REVIEW REQUIRED" };
     }
   }
 
@@ -396,7 +396,7 @@ function deriveMedications(patientData, formulary) {
   };
 
   if (auditStatus.status === "REJECTED") {
-    return { error: "UNSAFE TREATMENT PLAN — BLOCKED BY AUDIT ENGINE", auditDetails: auditStatus, auditLog: finalAuditLog };
+    return { error: "UNSAFE TREATMENT PLAN â€” BLOCKED BY AUDIT ENGINE", auditDetails: auditStatus, auditLog: finalAuditLog };
   }
 
   // Clean the internal object tags 

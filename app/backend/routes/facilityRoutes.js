@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const router = express.Router();
 const Facility = require("../models/Facility");
 
@@ -24,3 +24,4 @@ router.get("/", async (req, res) => {
 });
 
 module.exports = router;
+

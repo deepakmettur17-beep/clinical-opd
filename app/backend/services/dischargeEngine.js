@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Auto Discharge Summary Engine v2 (Medico-Legal Grade)
  * ---------------------------------------------------------
  * Aggregates clinical telemetry, notes, and audit trails
@@ -143,7 +143,7 @@ async function generateDischargeSummary(caseId, redisClient) {
   // Audit Trail
   const auditTrail = timeline.map(e => {
     const timeStr = new Date(e.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    return `[${timeStr}] ${e.type}: ${e.text} — Performed by ${e.actor}`;
+    return `[${timeStr}] ${e.type}: ${e.text} â€” Performed by ${e.actor}`;
   });
 
   const structured = {

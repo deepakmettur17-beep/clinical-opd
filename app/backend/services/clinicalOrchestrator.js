@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+﻿const crypto = require('crypto');
 const { handleChestPain } = require('./chestPainHandler');
 const { handleFever } = require('./feverHandler');
 const { handleBreathlessness } = require('./breathlessnessHandler');
@@ -75,7 +75,7 @@ const calculateVentilatorSettings = (diagnosis, abg, spo2, weight, height, gende
    else if (diag.includes('copd') || diag.includes('asthma') || diag.includes('obstruction')) {
       rrVal = 12;
       peepVal = 5; // NOT zero
-      settings.warnings.push("Risk of air trapping / auto-PEEP — reduce RR or increase expiratory time");
+      settings.warnings.push("Risk of air trapping / auto-PEEP â€” reduce RR or increase expiratory time");
    } 
    
    if (settings.interpretation.includes("Metabolic Acidosis")) {
@@ -96,7 +96,7 @@ const calculateVentilatorSettings = (diagnosis, abg, spo2, weight, height, gende
    // FiO2-PEEP SAFETY COUPLING
    if (fio2Val > 60) {
       peepVal = Math.min(15, peepVal + 2);
-      settings.warnings.push("High FiO2 — consider PEEP optimization to avoid oxygen toxicity");
+      settings.warnings.push("High FiO2 â€” consider PEEP optimization to avoid oxygen toxicity");
    }
    
    // Step 4: Safety Limits (Mandatory)
@@ -307,7 +307,7 @@ function processClinicalCase(data) {
       confidence = "High";
       severity = "Critical";
       treatmentPlan = "Epinephrine IM Injection";
-      oneLineSummary = "Anaphylaxis – immediate epinephrine required";
+      oneLineSummary = "Anaphylaxis â€“ immediate epinephrine required";
       immediatePlan = [
         "Give IM Epinephrine 0.5mg (1:1000) into anterolateral thigh",
         "Ensure airway patency / give O2",
@@ -450,9 +450,9 @@ function processClinicalCase(data) {
     if (spo2 < 85) {
       respiratoryStatus.hypoxia = true;
       respiratoryStatus.level = "Severe";
-      safetyAlerts.push("Severe hypoxia — immediate oxygen/airway support required");
+      safetyAlerts.push("Severe hypoxia â€” immediate oxygen/airway support required");
       if (spo2 < 70) {
-        safetyAlerts.push("Life-threatening hypoxia — consider intubation");
+        safetyAlerts.push("Life-threatening hypoxia â€” consider intubation");
       }
     } else if (spo2 < 90) {
       respiratoryStatus.hypoxia = true;
@@ -517,7 +517,7 @@ function processClinicalCase(data) {
     lifestyleAdvice: advicePayload.lifestyleAdvice,
     dietAdvice: advicePayload.dietAdvice,
     redFlagAdvice: advicePayload.redFlagAdvice,
-    // CONSISTENCY: guaranteed keys — never undefined
+    // CONSISTENCY: guaranteed keys â€” never undefined
     justification: '',         // will be set below
     historyGaps: missingCriticalQuestions || [],
     medicationAlerts: medicationAlerts || []
@@ -531,7 +531,7 @@ function processClinicalCase(data) {
     
     if (info) {
       const bInfo = info.brands.find(b => b.name === brand) || { strength: '' };
-      t.drug = `${brand} (${info.genericName} ${bInfo.strength} – ${info.drugClass})`;
+      t.drug = `${brand} (${info.genericName} ${bInfo.strength} â€“ ${info.drugClass})`;
     }
     return t;
   });
@@ -554,7 +554,7 @@ function processClinicalCase(data) {
 
     // MEDICO-LEGAL: append history gap disclaimer if present
     const historyNote = (res.historyGaps || []).some(g => !g.includes('cannot be fully excluded'))
-      ? ' | [RISK] Incomplete history — clinical risk cannot be fully excluded'
+      ? ' | [RISK] Incomplete history â€” clinical risk cannot be fully excluded'
       : '';
 
     return `[DATA] ${dataPoints.join(', ') || 'Vitals not recorded'} | [DECISION] ${decisions.join(' -> ')} | [ACTION] ${[...actionSet].join(', ') || 'Pending review'}${historyNote}`;
@@ -593,15 +593,15 @@ function processClinicalCase(data) {
       autoFixNotes.push(`No detailed history of ${complaint} onset, duration, or progression documented at time of assessment.`);
     }
     if (missingRedFlag) {
-      autoFixNotes.push(`No history of chest pain, exertion-related symptoms, or prior cardiac disease documented for this patient — clinician to verify.`);
+      autoFixNotes.push(`No history of chest pain, exertion-related symptoms, or prior cardiac disease documented for this patient â€” clinician to verify.`);
     }
     if (missingBg) {
-      autoFixNotes.push(`Past medical history, surgical history, drug allergies, and current medications not documented — baseline risk unknown.`);
+      autoFixNotes.push(`Past medical history, surgical history, drug allergies, and current medications not documented â€” baseline risk unknown.`);
     }
     
     // STRICT: Dedup and Ensure at least 1 note if gaps exist
     if (autoFixNotes.length === 0 && gaps.length > 0) {
-      autoFixNotes.push(`Clinical history incomplete — gaps identified in documentation must be manually addressed.`);
+      autoFixNotes.push(`Clinical history incomplete â€” gaps identified in documentation must be manually addressed.`);
     }
   }
 

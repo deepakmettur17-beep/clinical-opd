@@ -1,4 +1,4 @@
-function generateAdvice(diagnosis, habits, history) {
+﻿function generateAdvice(diagnosis, habits, history) {
   let lifestyleAdvice = [];
   let dietAdvice = [];
   let redFlagAdvice = [

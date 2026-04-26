@@ -1,4 +1,4 @@
-const { processClinicalCase } = require('./clinicalOrchestrator');
+﻿const { processClinicalCase } = require('./clinicalOrchestrator');
 const { GlobalLogger } = require('./auditLogger');
 const { logError } = require('./errorLogger');
 
@@ -12,7 +12,7 @@ async function executePipeline(payload) {
   if (!GlobalLogger.verifyChainIntegrity() || GlobalLogger.globalSafeMode) {
     return {
       status: "SAFE_MODE",
-      message: "System delay — follow emergency protocol manually",
+      message: "System delay â€” follow emergency protocol manually",
       fallbackPlan: [
         "Stabilize airway, breathing, circulation",
         "Call senior consultant immediately"
@@ -42,7 +42,7 @@ async function executePipeline(payload) {
       // CDSS Execution
       const cdssOutput = processClinicalCase(p.payload);
       if (cdssOutput.error && cdssOutput.error.includes("INVALID INPUT")) {
-         throw new Error("INVALID INPUT — REJECTED");
+         throw new Error("INVALID INPUT â€” REJECTED");
       }
       if (cdssOutput.error && cdssOutput.error.includes("SAFE MODE")) {
          throw new Error("SAFE_MODE");
@@ -98,7 +98,7 @@ async function executePipeline(payload) {
            pLog.decisionTrace.push({ step: "Resource Allocation", result: `Allocated 1 ICU Bed. Remaining: ${hospitalState.icuBedsAvailable}` });
          } else {
            t.action = "WAITLISTED (ER HOLDING)";
-           t.escalation = "NO ICU BED AVAILABLE — TRANSFER REQUIRED";
+           t.escalation = "NO ICU BED AVAILABLE â€” TRANSFER REQUIRED";
            pLog.decisionTrace.push({ step: "Resource Allocation", result: `ICU Allocation FAILED (0 available). Patient Waitlisted.` });
            if (!alerts.includes("RESOURCE LIMIT BREACHED: ICU BEDS FULL")) alerts.push("RESOURCE LIMIT BREACHED: ICU BEDS FULL");
          }
@@ -146,10 +146,10 @@ async function executePipeline(payload) {
 
   } catch (err) {
     if (payload?.requestId) logError(payload.requestId, err.message);
-    if (err.message.includes("INVALID CLINICAL INPUT")) return { error: "INVALID CLINICAL INPUT — CHECK VITALS" };
+    if (err.message.includes("INVALID CLINICAL INPUT")) return { error: "INVALID CLINICAL INPUT â€” CHECK VITALS" };
     return {
       status: "SAFE_MODE",
-      message: "System delay — follow emergency protocol manually",
+      message: "System delay â€” follow emergency protocol manually",
       fallbackPlan: [
         "Stabilize airway, breathing, circulation",
         "Call senior consultant immediately"
@@ -161,7 +161,7 @@ async function executePipeline(payload) {
 async function runHospitalOS(payload) {
   // TIMEOUT CONTROL (HARD LIMIT)
   const timeoutPromise = new Promise((_, reject) => 
-    setTimeout(() => reject(new Error("SYSTEM TIMEOUT — SAFE MODE ACTIVATED")), 3000)
+    setTimeout(() => reject(new Error("SYSTEM TIMEOUT â€” SAFE MODE ACTIVATED")), 3000)
   );
 
   try {
@@ -179,7 +179,7 @@ async function runHospitalOS(payload) {
     }
     return {
       status: "SAFE_MODE",
-      message: "System delay — follow emergency protocol manually",
+      message: "System delay â€” follow emergency protocol manually",
       fallbackPlan: [
         "Stabilize airway, breathing, circulation",
         "Call senior consultant immediately"

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 
 const VisitSchema = new mongoose.Schema(
   {
@@ -290,3 +290,5 @@ module.exports = mongoose.model("Visit", VisitSchema);
 VisitSchema.pre("save", function () {
   this.calculateDoorToBalloon();
 });
+
+

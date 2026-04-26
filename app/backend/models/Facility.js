@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 
 const facilitySchema = new mongoose.Schema({
 
@@ -15,3 +15,5 @@ const facilitySchema = new mongoose.Schema({
 }, { timestamps: true });
 
 module.exports = mongoose.model("Facility", facilitySchema);
+
+

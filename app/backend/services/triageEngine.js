@@ -1,16 +1,16 @@
-/**
+﻿/**
  * Hospital Triage Priority Engine
  * ---------------------------------------------------------
  * Evaluates all active patients and sorts them by computed
  * triage score so consultants know WHO to see first.
  *
- * SAFETY: Decision-support only — no auto-action.
+ * SAFETY: Decision-support only â€” no auto-action.
  *
  * Inputs per patient:
  *   - predictiveRisk     ('HIGH' | 'MODERATE' | 'LOW')
- *   - riskScore          (0–100)
+ *   - riskScore          (0â€“100)
  *   - priorityLevel      ('IMMEDIATE' | 'URGENT' | 'ROUTINE')
- *   - complianceScore    (0–100)
+ *   - complianceScore    (0â€“100)
  *   - missedImmediateCount (integer)
  *   - lastActionAt       (ms timestamp or null)
  *   - caseId, patientName
@@ -56,7 +56,7 @@ function computeTriageScore({
   // Poor compliance
   if (complianceScore < 70) {
     score += 2;
-    reasons.push(`Compliance score ${complianceScore}/100 — below threshold (+2)`);
+    reasons.push(`Compliance score ${complianceScore}/100 â€” below threshold (+2)`);
   }
 
   // Missed IMMEDIATE steps
@@ -89,9 +89,9 @@ function classifyUrgency(triageScore, maxScore) {
 }
 
 /**
- * Main engine — takes an array of patient data, returns sorted triage list.
+ * Main engine â€” takes an array of patient data, returns sorted triage list.
  *
- * @param {Array} patients — array of patient objects with required fields
+ * @param {Array} patients â€” array of patient objects with required fields
  * @returns {Array} sorted triage list
  */
 function runTriageEngine(patients = []) {

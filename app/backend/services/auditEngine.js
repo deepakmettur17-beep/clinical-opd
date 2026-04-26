@@ -1,4 +1,4 @@
-function logRiskAudit(visit) {
+﻿function logRiskAudit(visit) {
 
     const auditEntry = {
       severityLevel: visit.severityLevel,

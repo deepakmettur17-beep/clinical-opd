@@ -1,4 +1,4 @@
-function calculateGraceScore(visit, patient) {
+﻿function calculateGraceScore(visit, patient) {
 
     let score = 0;
   
@@ -39,8 +39,8 @@ function calculateGraceScore(visit, patient) {
     let mortality = "";
   
     if (score < 100) mortality = "<1%";
-    else if (score < 150) mortality = "1–5%";
-    else if (score < 180) mortality = "5–15%";
+    else if (score < 150) mortality = "1â€“5%";
+    else if (score < 180) mortality = "5â€“15%";
     else mortality = ">20% (Very High Risk)";
   
     return {

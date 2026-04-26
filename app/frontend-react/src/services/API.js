@@ -1,7 +1,6 @@
-import axios from "axios";
-
-const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
-
+import axios from 'axios';
+import { API_BASE_URL } from "../config";
+const API_BASE = `${API_BASE_URL}`;
 const API = axios.create({
   baseURL: API_BASE,
 });
@@ -38,7 +37,7 @@ export const deleteVisit = (id) => {
 
 
 export const getAISuggestions = (complaint, vitals, age, sex, labs) => {
-  return API.post("/ai/suggest", { complaint, vitals, age, sex, labs });
+  return API.post("/api/clinical", { complaint, vitals, age, sex, labs });
 };
 
 export const getFollowUpAnalysis = (patientId) => {
@@ -49,5 +48,6 @@ export const getPharmacyStock = (query) => {
   return API.get(`/pharmacy/stock/${query}`);
 };
 export const interpretReport = (reportText, symptoms = "", vitals = {}) => {
-  return API.post("/clinical/interpret-report", { reportText, symptoms, vitals });
+  return API.post("/api/clinical/interpret-report", { reportText, symptoms, vitals });
 };
+

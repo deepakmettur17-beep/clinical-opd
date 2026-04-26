@@ -1,4 +1,4 @@
-function handleTrauma(visit, patient, facility) {
+﻿function handleTrauma(visit, patient, facility) {
   const parseBP = (bpStr) => {
     if (!bpStr) return { sys: 120, dia: 80 };
     const [sys, dia] = bpStr.split('/');
@@ -40,8 +40,8 @@ function handleTrauma(visit, patient, facility) {
   let timeToAction = "Immediate";
   
   let oneLineSummary = severity === "Critical" 
-    ? "Major trauma with ABC compromise – immediate resuscitation required"
-    : "Trauma evaluation – stabilize and assess for isolated injuries";
+    ? "Major trauma with ABC compromise â€“ immediate resuscitation required"
+    : "Trauma evaluation â€“ stabilize and assess for isolated injuries";
 
   let immediatePlan = [
     "Secure airway",

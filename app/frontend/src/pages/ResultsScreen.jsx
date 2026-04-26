@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Button } from '../components/UI';
-import { useNavigate } from 'react-router-dom';
 import ClinicalNotes from '../components/ClinicalNotes';
+import { API_BASE_URL } from '../config';
+
 export default function ResultsScreen({ result, onReset, user, silentMode, socket }) {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
@@ -34,7 +33,7 @@ export default function ResultsScreen({ result, onReset, user, silentMode, socke
   const [isGeneratingInsurance, setIsGeneratingInsurance] = useState(false);
   const [showManualCopy, setShowManualCopy] = useState(false);
 
-  const API_BASE = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.hostname}:5000` : "http://localhost:5000");
+  const API_BASE = API_BASE_URL;
 
   const downloadPDF = (type) => {
     if (!result || !result.caseId) return;

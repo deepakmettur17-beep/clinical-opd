@@ -1,4 +1,4 @@
-const router = require("express").Router();
+﻿const router = require("express").Router();
 const Lab = require("../models/Lab");
 
 router.post("/", async (req,res)=>{
@@ -12,3 +12,5 @@ router.get("/:visitId", async (req,res)=>{
 });
 
 module.exports = router;
+
+

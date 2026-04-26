@@ -1,4 +1,4 @@
-function applyKillipMortality(visit) {
+﻿function applyKillipMortality(visit) {
 
     if (!visit.killipClass) return;
   
@@ -18,7 +18,7 @@ function applyKillipMortality(visit) {
         break;
   
       case 4:
-        visit.killipMortalityPercent = "40–60% (Cardiogenic Shock)";
+        visit.killipMortalityPercent = "40â€“60% (Cardiogenic Shock)";
         visit.criticalCare = true;
         visit.severityLevel = "Critical";
         break;

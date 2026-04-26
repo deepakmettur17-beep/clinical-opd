@@ -1,4 +1,4 @@
-function handleStroke(visit, patient, facility) {
+﻿function handleStroke(visit, patient, facility) {
   const parseBP = (bpStr) => {
     if (!bpStr) return { sys: 120, dia: 80 };
     const [sys, dia] = bpStr.split('/');
@@ -15,7 +15,7 @@ function handleStroke(visit, patient, facility) {
   let timeToAction = "Immediate";
   let disposition = "Admit ICU";
   
-  let oneLineSummary = "Acute neurological deficit – activate stroke protocol";
+  let oneLineSummary = "Acute neurological deficit â€“ activate stroke protocol";
   let actionChecklist = [
     { step: 1, action: "Urgent non-contrast CT Head", urgency: "Immediate" },
     { step: 2, action: "Neurology/Stroke Consult", urgency: "Immediate" }
@@ -75,7 +75,7 @@ function handleStroke(visit, patient, facility) {
   // Calculate strokeTypeSuggestion
   let strokeTypeSuggestion = "Likely Ischemic (pending CT)";
   if (sysBP > 180 || complaintStr.includes("headache") || complaintStr.includes("vomiting")) {
-    strokeTypeSuggestion = "Possible Hemorrhagic – urgent CT required";
+    strokeTypeSuggestion = "Possible Hemorrhagic â€“ urgent CT required";
   }
 
   let contraindicationsCheck = [
@@ -106,9 +106,9 @@ function handleStroke(visit, patient, facility) {
   }
 
   if (thrombolysisEligible) {
-    oneLineSummary = "Acute stroke within thrombolysis window – activate stroke protocol immediately";
+    oneLineSummary = "Acute stroke within thrombolysis window â€“ activate stroke protocol immediately";
   } else {
-    oneLineSummary = "Acute stroke outside thrombolysis window – evaluate for thrombectomy";
+    oneLineSummary = "Acute stroke outside thrombolysis window â€“ evaluate for thrombectomy";
   }
   
   immediatePlan = immediatePlan.slice(0, 5);

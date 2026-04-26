@@ -1,4 +1,4 @@
-function drugDoseEngine({ drug, weight, creatinineClearance }) {
+﻿function drugDoseEngine({ drug, weight, creatinineClearance }) {
     let recommendation = "";
   
     if (!drug || !weight) {
@@ -17,7 +17,7 @@ function drugDoseEngine({ drug, weight, creatinineClearance }) {
   
     // Example: Ceftriaxone
     if (drug.toLowerCase() === "ceftriaxone") {
-      let dose = weight < 50 ? "50–75 mg/kg/day" : "1–2 g once daily";
+      let dose = weight < 50 ? "50â€“75 mg/kg/day" : "1â€“2 g once daily";
       recommendation = `Ceftriaxone dosing: ${dose}`;
     }
   
@@ -26,3 +26,5 @@ function drugDoseEngine({ drug, weight, creatinineClearance }) {
   
   module.exports = drugDoseEngine;
   
+
+

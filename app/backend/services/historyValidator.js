@@ -1,12 +1,12 @@
-/**
- * historyValidator.js — Hardened v2
+﻿/**
+ * historyValidator.js â€” Hardened v2
  * Fail-safe, deduplicated, and medico-legal compliant.
  */
 function validateHistory(historyTemplate, userAnswers) {
   // FAIL-SAFE: always return array, never throw
   if (!historyTemplate) return [];
 
-  // Null-safe normalisation — supports: object, array, null, undefined
+  // Null-safe normalisation â€” supports: object, array, null, undefined
   let answered = [];
   if (Array.isArray(userAnswers)) {
     answered = userAnswers
@@ -15,7 +15,7 @@ function validateHistory(historyTemplate, userAnswers) {
   } else if (userAnswers && typeof userAnswers === 'object') {
     answered = Object.keys(userAnswers).map(k => k.toLowerCase());
   }
-  // Else: answered stays [] — will surface all gaps
+  // Else: answered stays [] â€” will surface all gaps
 
   const coreQuestions       = historyTemplate.coreQuestions       || [];
   const redFlags            = historyTemplate.redFlags             || [];
@@ -65,7 +65,7 @@ function validateHistory(historyTemplate, userAnswers) {
   // MEDICO-LEGAL HARDENING: append risk disclaimer when gaps exist
   if (missingCriticalQuestions.length > 0) {
     missingCriticalQuestions.push(
-      'Incomplete history — clinical risk cannot be fully excluded'
+      'Incomplete history â€” clinical risk cannot be fully excluded'
     );
   }
 

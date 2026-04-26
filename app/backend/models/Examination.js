@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 
 const ExaminationSchema = new mongoose.Schema({
   visit: { type: mongoose.Schema.Types.ObjectId, ref: "Visit", required: true },
@@ -19,3 +19,6 @@ const ExaminationSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 module.exports = mongoose.model("Examination", ExaminationSchema);
+
+
+

@@ -1,4 +1,4 @@
-const { evaluateCardiacIntelligence } = require('./cardiacEngine');
+﻿const { evaluateCardiacIntelligence } = require('./cardiacEngine');
 const { calculateDTB } = require('./dtbEngine');
 const { calculateGraceScore } = require('./graceEngine');
 const { applyKillipMortality } = require('./killipEngine');
@@ -70,7 +70,7 @@ function handleChestPain(visit, patient, facility) {
     if (!hasCathLab) {
       transferNeeded = true;
       treatmentPlan = "Transfer for Primary PCI";
-      oneLineSummary = "STEMI – urgent PCI required, prepare for transfer";
+      oneLineSummary = "STEMI â€“ urgent PCI required, prepare for transfer";
       
       actionChecklist = [
         { step: 1, action: "Give aspirin 325 mg immediately", urgency: "Immediate" },
@@ -84,7 +84,7 @@ function handleChestPain(visit, patient, facility) {
     } else {
       transferNeeded = false;
       treatmentPlan = "Immediate Primary PCI (Onsite)";
-      oneLineSummary = "STEMI – urgent PCI required (Local Cath Lab)";
+      oneLineSummary = "STEMI â€“ urgent PCI required (Local Cath Lab)";
 
       actionChecklist = [
         { step: 1, action: "Give aspirin 325 mg immediately", urgency: "Immediate" },

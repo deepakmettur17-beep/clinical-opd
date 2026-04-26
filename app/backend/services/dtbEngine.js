@@ -1,4 +1,4 @@
-function calculateDTB(visit) {
+﻿function calculateDTB(visit) {
 
     if (!visit.doorTime || !visit.balloonTime) return visit;
   
@@ -18,10 +18,10 @@ function calculateDTB(visit) {
     visit.doorToBalloonMinutes = minutes;
   
     if (minutes <= 90) {
-      visit.dtbPerformanceFlag = "On Time (≤90 min)";
+      visit.dtbPerformanceFlag = "On Time (â‰¤90 min)";
     } 
     else if (minutes <= 120) {
-      visit.dtbPerformanceFlag = "Delayed (90–120 min)";
+      visit.dtbPerformanceFlag = "Delayed (90â€“120 min)";
       visit.pciDelayAlert = true;
       visit.pciDelayLevel = "Moderate Delay";
       visit.pciAlertGeneratedAt = new Date();

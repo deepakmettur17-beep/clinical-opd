@@ -1,14 +1,15 @@
 services:
   - type: web
-    name: clinical-opd-backend
+    name: clinical-opd-system
     runtime: node
     plan: free
-    rootDir: app/backend
-    buildCommand: npm install
-    startCommand: node server.js
+    buildCommand: npm run install-all && npm run build-frontend
+    startCommand: npm start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URI
         sync: false
+      - key: PORT
+        value: 5000

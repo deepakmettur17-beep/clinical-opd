@@ -1,4 +1,4 @@
-function generateTransferLetter(visit, patient, facility) {
+﻿function generateTransferLetter(visit, patient, facility) {
 
     console.log("ENGINE RECEIVED PATIENT:", patient);
 
