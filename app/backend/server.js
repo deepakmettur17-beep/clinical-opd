@@ -1239,7 +1239,6 @@ setInterval(() => {
 
 // Redundant imports and middleware removed
 
-const clinicalRoutes = require('./routes/clinicalRoutes');
 const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, 
