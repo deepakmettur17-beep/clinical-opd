@@ -3,7 +3,7 @@ services:
     name: clinical-opd-api
     env: docker
     dockerContext: app/backend
-    dockerfilePath: app/backend/Dockerfile
+    dockerfilePath: Dockerfile
     plan: free
     region: singapore
     envVars:
