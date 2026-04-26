@@ -4,7 +4,7 @@ services:
     env: docker
     dockerContext: app/backend
     dockerfilePath: Dockerfile
-    plan: starter
+    plan: free
     region: singapore
     envVars:
       - key: PORT
@@ -27,10 +27,10 @@ services:
 
   - type: redis
     name: clinical-cache
-    plan: starter
+    plan: free
     ipAllowList: [] # Only allow internal traffic
 
 databases:
   - name: clinical-db
-    plan: starter
+    plan: free
     postgresMajorVersion: 16
