@@ -3,7 +3,7 @@ services:
     name: clinical-opd-api
     env: docker
     dockerContext: app/backend
-    dockerfile: Dockerfile
+    dockerfilePath: Dockerfile
     plan: starter
     region: singapore
     envVars:
@@ -25,12 +25,12 @@ services:
       - key: AI_API_KEY
         sync: false
 
+  - type: redis
+    name: clinical-cache
+    plan: starter
+    ipAllowList: [] # Only allow internal traffic
+
 databases:
   - name: clinical-db
     plan: starter
     postgresMajorVersion: 16
-
-redis:
-  - name: clinical-cache
-    plan: starter
-    ipAllowList: [] # Only allow internal traffic
