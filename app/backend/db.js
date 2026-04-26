@@ -1,18 +1,32 @@
-const mongoose = require("mongoose");
+const { PrismaClient } = require('@prisma/client');
+const logger = require('./config/pinoLogger');
+
+const prisma = new PrismaClient({
+  log: [
+    { level: 'query', emit: 'event' },
+    { level: 'info', emit: 'stdout' },
+    { level: 'warn', emit: 'stdout' },
+    { level: 'error', emit: 'stdout' },
+  ],
+});
+
+prisma.$on('query', (e) => {
+  logger.debug(`Query: ${e.query}`);
+  logger.debug(`Params: ${e.params}`);
+  logger.debug(`Duration: ${e.duration}ms`);
+});
 
 const connectDB = async () => {
   try {
-    const connStr = process.env.MONGODB_URI || process.env.MONGO_URI;
-    if (!connStr) {
-      throw new Error("Neither MONGODB_URI nor MONGO_URI is defined");
+    await prisma.$connect();
+    logger.info('PostgreSQL connected via Prisma');
+  } catch (error) {
+    logger.error('PostgreSQL connection error:', error);
+    // In dev mode, we might want to continue even if DB is down if we have fallback logic
+    if (process.env.NODE_ENV === 'production') {
+       process.exit(1);
     }
-    await mongoose.connect(connStr);
-    console.log("MongoDB connected");
-  } catch (err) {
-    console.error("MongoDB connection error:", err.message);
-    process.exit(1);
   }
 };
 
-module.exports = connectDB;
-
+module.exports = { prisma, connectDB };

@@ -1,13 +1,9 @@
-﻿const Visit = require("../models/Visit");
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/authController');
 
-exports.getVisits = async (req, res) => {
-  const visits = await Visit.find().populate("patientId");
-  res.json(visits);
-};
+router.post('/login', authController.login);
+router.post('/refresh-tokens', authController.refreshTokens);
+router.post('/logout', authController.logout);
 
-exports.createVisit = async (req, res) => {
-  const visit = await Visit.create(req.body);
-  res.status(201).json(visit);
-};
-
-
+module.exports = router;

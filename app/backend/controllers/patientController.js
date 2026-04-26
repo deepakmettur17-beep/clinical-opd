@@ -1,46 +1,38 @@
-﻿const Patient = require("../models/Patient");
+const patientRepository = require('../repositories/PatientRepository');
+const { catchAsync } = require('../middleware/errorMiddleware');
+const { ApiError } = require('../middleware/errorMiddleware');
 
-const getPatients = async (req, res) => {
-  try {
-    const patients = await Patient.find();
-    res.json(patients);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+const getPatients = catchAsync(async (req, res) => {
+  const { facilityId } = req.user; // Assuming facilityId is in JWT
+  const patients = await patientRepository.findAll(facilityId);
+  res.json({ success: true, data: patients });
+});
 
-const getPatientById = async (req, res) => {
-  try {
-    const patient = await Patient.findById(req.params.id);
-    res.json(patient);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+const getPatientById = catchAsync(async (req, res) => {
+  const patient = await patientRepository.findById(req.params.id);
+  if (!patient) {
+    throw new ApiError(404, 'Patient not found');
   }
-};
+  res.json({ success: true, data: patient });
+});
 
-const createPatient = async (req, res) => {
-  try {
-    const patient = await Patient.create(req.body);
-    res.status(201).json(patient);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
+const createPatient = catchAsync(async (req, res) => {
+  const { facilityId } = req.user;
+  const patient = await patientRepository.create({
+    ...req.body,
+    facilityId
+  });
+  res.status(201).json({ success: true, data: patient });
+});
 
-const deletePatient = async (req, res) => {
-  try {
-    await Patient.findByIdAndDelete(req.params.id);
-    res.json({ message: "Patient deleted" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+const updatePatient = catchAsync(async (req, res) => {
+  const patient = await patientRepository.update(req.params.id, req.body);
+  res.json({ success: true, data: patient });
+});
 
 module.exports = {
   getPatients,
   getPatientById,
   createPatient,
-  deletePatient
+  updatePatient
 };
-
-

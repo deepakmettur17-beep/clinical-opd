@@ -1,15 +1,36 @@
 services:
   - type: web
-    name: clinical-opd-system
-    runtime: node
-    plan: free
-    buildCommand: npm run install-all && npm run build-frontend
-    startCommand: npm start
-    healthCheckPath: /api/health
+    name: clinical-opd-api
+    env: docker
+    dockerContext: app/backend
+    dockerfile: Dockerfile
+    plan: starter
+    region: singapore
     envVars:
+      - key: PORT
+        value: 8080
       - key: NODE_ENV
         value: production
-      - key: MONGODB_URI
+      - key: DATABASE_URL
+        fromDatabase:
+          name: clinical-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: clinical-cache
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: AI_API_KEY
         sync: false
-      - key: PORT
-        value: 5000
+
+databases:
+  - name: clinical-db
+    plan: starter
+    postgresMajorVersion: 16
+
+redis:
+  - name: clinical-cache
+    plan: starter
+    ipAllowList: [] # Only allow internal traffic
