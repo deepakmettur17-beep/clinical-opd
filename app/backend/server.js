@@ -58,10 +58,10 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/patients', patientRoutes);
 app.use('/visits', visitRoutes);
 app.use('/api/ai', aiRoutes);
-app.use('/api/clinical', clinicalRoutes);
+app.use('/api', clinicalRoutes);
 
 app.get('/api/health', (req, res) => {
-  res.json({ ok: true, service: 'clinical-opd-backend' });
+  res.json({ ok: true, service: 'clinical-opd-backend', status: 'live' });
 });
 
 const server = http.createServer(app);
