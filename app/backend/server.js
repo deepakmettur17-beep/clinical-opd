@@ -10,7 +10,7 @@ const { connectDB } = require('./db');
 const logger = require('./config/pinoLogger');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const { socketAuth } = require('./middleware/authMiddleware');
-const { apiLimiter, xss } = require('./middleware/securityMiddleware');
+const { apiLimiter } = require('./middleware/securityMiddleware');
 const requestContext = require('./middleware/requestContext');
 const routes = require('./routes');
 const socketHandlers = require('./socket/socketHandlers');
@@ -37,7 +37,6 @@ app.use(cors(corsOptions));
 
 // Global Security Middleware
 app.use('/api', apiLimiter);
-app.use(xss());
 app.use(requestContext);
 
 // Body Parsers

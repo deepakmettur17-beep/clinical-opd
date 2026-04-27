@@ -1,5 +1,4 @@
 const rateLimit = require('express-rate-limit');
-const xss = require('xss-clean');
 const { ApiError } = require('./errorMiddleware');
 
 /**
@@ -41,6 +40,5 @@ const authorize = (...roles) => {
 module.exports = {
   apiLimiter,
   clinicalLimiter,
-  authorize,
-  xss
+  authorize
 };
