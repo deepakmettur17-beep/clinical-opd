@@ -7,6 +7,10 @@ FROM base AS builder
 WORKDIR /src
 # Copy the entire monorepo into /src
 COPY . .
+# Build Frontend
+WORKDIR /src/app/frontend-react
+RUN npm install
+RUN npm run build
 # Now the backend is at /src/app/backend
 WORKDIR /src/app/backend
 RUN npm install
@@ -17,6 +21,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 # Copy only the backend folder from builder to the runner's /app
 COPY --from=builder /src/app/backend ./
+# Copy the built frontend into a 'public' directory
+COPY --from=builder /src/app/frontend-react/build ./public
 # Remove dev dependencies
 RUN npm prune --omit=dev
 

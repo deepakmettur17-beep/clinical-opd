@@ -73,10 +73,10 @@ app.use('/api', routes);
 
 // Serve Frontend
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend-react/build')));
+  app.use(express.static(path.join(__dirname, 'public')));
   app.get('*', (req, res) => {
     if (!req.path.startsWith('/api')) {
-      res.sendFile(path.resolve(__dirname, '../frontend-react', 'build', 'index.html'));
+      res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
     }
   });
 }
