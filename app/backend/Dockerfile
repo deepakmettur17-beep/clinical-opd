@@ -14,7 +14,7 @@ RUN npm run build
 # Now the backend is at /src/app/backend
 WORKDIR /src/app/backend
 RUN npm install
-RUN npx prisma generate
+RUN DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy" npx prisma generate
 
 FROM base AS runner
 WORKDIR /app
