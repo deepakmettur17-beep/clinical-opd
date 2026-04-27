@@ -9,8 +9,6 @@ services:
     envVars:
       - key: PORT
         value: 8080
-      - key: PRISMA_CLIENT_ENGINE_TYPE
-        value: binary
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
@@ -25,6 +23,8 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: AI_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
         sync: false
 
   - type: redis
