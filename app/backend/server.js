@@ -74,10 +74,8 @@ app.use('/api', routes);
 // Serve Frontend
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'public')));
-  app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api')) {
-      res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-    }
+  app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
   });
 }
 
