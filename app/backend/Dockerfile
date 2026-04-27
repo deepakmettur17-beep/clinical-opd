@@ -1,29 +1,29 @@
 FROM node:20-slim AS base
-RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable && apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 FROM base AS deps
 WORKDIR /app
-# Copy only backend package files for dependency caching
-COPY app/backend/package.json app/backend/package-lock.json ./
+COPY package.json package-lock.json ./
+# Install ALL dependencies including devDeps for the builder
 RUN npm install
 
 FROM base AS builder
 WORKDIR /app
-# Copy the whole repo first (since context is root)
 COPY . .
-# Overwrite node_modules with the ones from deps stage
-COPY --from=deps /app/node_modules ./app/backend/node_modules
-# Generate prisma client from the backend directory
-RUN cd app/backend && npx prisma generate
+COPY --from=deps /app/node_modules ./node_modules
+# Set engine type for generation
+ENV PRISMA_CLIENT_ENGINE_TYPE=binary
+RUN npx prisma generate
 
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-# Copy necessary files from builder
+ENV PRISMA_CLIENT_ENGINE_TYPE=binary
 COPY --from=builder /app ./
-# Prune dev dependencies in backend
-RUN cd app/backend && npm prune --omit=dev
+# Prune dev dependencies for production
+RUN npm prune --omit=dev
 
 EXPOSE 8080
-# Run from the root as defined in package.json start script
 CMD ["npm", "start"]
