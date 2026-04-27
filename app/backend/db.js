@@ -1,7 +1,15 @@
 const { PrismaClient } = require('@prisma/client');
+const { PrismaPg } = require('@prisma/adapter-pg');
+const { Pool } = require('pg');
 const logger = require('./config/pinoLogger');
 
+const connectionString = process.env.DATABASE_URL;
+
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+
 const prisma = new PrismaClient({
+  adapter,
   log: [
     { level: 'query', emit: 'event' },
     { level: 'info', emit: 'stdout' },
@@ -19,10 +27,9 @@ prisma.$on('query', (e) => {
 const connectDB = async () => {
   try {
     await prisma.$connect();
-    logger.info('PostgreSQL connected via Prisma');
+    logger.info('PostgreSQL connected via Prisma (Driver Adapter)');
   } catch (error) {
     logger.error('PostgreSQL connection error:', error);
-    // In dev mode, we might want to continue even if DB is down if we have fallback logic
     if (process.env.NODE_ENV === 'production') {
        process.exit(1);
     }
