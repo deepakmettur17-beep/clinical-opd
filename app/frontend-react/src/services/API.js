@@ -8,29 +8,29 @@ const API = axios.create({
 // ===== PATIENTS =====
 
 export const fetchPatients = () => {
-  return API.get("/patients");
+  return API.get("/api/patients");
 };
 
 export const createPatient = (data) => {
-  return API.post("/patients", data);
+  return API.post("/api/patients", data);
 };
 
 export const deletePatient = (id) => {
-  return API.delete(`/patients/${id}`);
+  return API.delete(`/api/patients/${id}`);
 };
 
 // ===== VISITS =====
 
 export const fetchVisits = () => {
-  return API.get("/visits");
+  return API.get("/api/visits");
 };
 
 export const createVisit = (data) => {
-  return API.post("/visits", data);
+  return API.post("/api/visits", data);
 };
 
 export const deleteVisit = (id) => {
-  return API.delete(`/visits/${id}`);
+  return API.delete(`/api/visits/${id}`);
 };
 
 // ===== AI SUGGESTIONS =====
@@ -41,11 +41,11 @@ export const getAISuggestions = (complaint, vitals, age, sex, labs) => {
 };
 
 export const getFollowUpAnalysis = (patientId) => {
-  return API.get(`/clinical/followup/${patientId}`);
+  return API.get(`/api/clinical/followup/${patientId}`);
 };
 
 export const getPharmacyStock = (query) => {
-  return API.get(`/pharmacy/stock/${query}`);
+  return API.get(`/api/pharmacy/stock/${query}`);
 };
 export const interpretReport = (reportText, symptoms = "", vitals = {}) => {
   return API.post("/api/clinical/interpret-report", { reportText, symptoms, vitals });
