@@ -4,19 +4,20 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 FROM base AS builder
-WORKDIR /app
+WORKDIR /src
+# Copy the entire monorepo into /src
 COPY . .
-# Install all dependencies (in the root or app/backend?)
-# The package.json is in app/backend
-WORKDIR /app/backend
+# Now the backend is at /src/app/backend
+WORKDIR /src/app/backend
 RUN npm install
 RUN npx prisma generate
 
 FROM base AS runner
-WORKDIR /app/backend
+WORKDIR /app
 ENV NODE_ENV=production
-COPY --from=builder /app/backend ./
-# Prune dev dependencies
+# Copy only the backend folder from builder to the runner's /app
+COPY --from=builder /src/app/backend ./
+# Remove dev dependencies
 RUN npm prune --omit=dev
 
 EXPOSE 8080
